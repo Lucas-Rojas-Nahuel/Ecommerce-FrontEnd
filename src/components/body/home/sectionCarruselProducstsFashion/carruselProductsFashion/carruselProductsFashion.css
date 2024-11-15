@@ -1,26 +1,26 @@
-.section-slider {
+.section-slider-fashion {
   height: 100%;
   position: relative;
   overflow: hidden;
   padding: 2px;
 }
 
-.scroll-content {
+.scroll-content-fashion {
   height: 100%;
   display: grid;
   grid-template-columns: repeat(5, minmax(32.7%, 1fr)); /* 5 columnas */
   gap: 10px;
-  animation: scroll 30s linear infinite;
+  animation: scrollFashion 30s linear infinite;
 }
 
-.card {
+.card-fashion {
   background-color: rgb(55, 160, 196);
   padding: 20px;
   text-align: center;
   border-radius: 10px;
 }
 
-@keyframes scroll {
+@keyframes scrollFashion {
   0% {
     transform: translateX(2%);
   }
@@ -35,20 +35,14 @@
 }
 
 @media (max-width: 600px) {
-  
-  .scroll-content {
+  .scroll-content-fashion {
     animation: none;
     grid-template-columns: repeat(10, minmax(100%, 1fr));
     overflow-x: scroll;
     touch-action: pan-x;
   }
 
-  .card {
+  .card-fashion{
     height: 300px;
   }
-
-  
 }
-  
-  
-

@@ -7,6 +7,7 @@ import slide3 from "../../public/body/home/sectionCarrusel/slide3.jpeg";
 import SectionDiscount from "../components/body/home/sectionCarruselProductsDiscount/sectionDiscount";
 import SectionCarrusel from "../components/body/home/sectionCarrusel/sectionCarrusel";
 import SectionOutstanding from "../components/body/home/sectionCarruselProductsOutstanding/sectionOutstanding";
+import SectionFashion from "../components/body/home/sectionCarruselProducstsFashion/sectionFashion";
 
 const images = [slide1, slide2, slide3];
 
@@ -21,7 +22,7 @@ export default function Home() {
       {/*section carrosel de productos destacados*/}
       <SectionOutstanding/>
       {/* carrosel de productos de moda, ropa, zapato, etc */}
-      <section>carrosel moda</section>
+      <SectionFashion/>
     </section>
   );
 }

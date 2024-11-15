@@ -15,10 +15,10 @@ export default function SectionOutstanding() {
       </section>
       <section className="section-link">
         <a href="">
-          <strong>Ver más productos destacados</strong>
+          <strong>Ver más sobre destacados</strong>
           <i className="fi fi-rr-angle-small-right"></i>
         </a>
       </section>
-    </section>
+    </section> 
   );
 }

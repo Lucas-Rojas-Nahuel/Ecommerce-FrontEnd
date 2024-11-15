@@ -6,6 +6,7 @@ import slide2 from "../../public/body/home/sectionCarrusel/slide2.jpeg";
 import slide3 from "../../public/body/home/sectionCarrusel/slide3.jpeg";
 import SectionDiscount from "../components/body/home/sectionCarruselProductsDiscount/sectionDiscount";
 import SectionCarrusel from "../components/body/home/sectionCarrusel/sectionCarrusel";
+import SectionOutstanding from "../components/body/home/sectionCarruselProductsOutstanding/sectionOutstanding";
 
 const images = [slide1, slide2, slide3];
 
@@ -18,7 +19,7 @@ export default function Home() {
       {/*section carrosel de  productos con descuentos*/}
       <SectionDiscount/>
       {/*section carrosel de productos destacados*/}
-      <section>carrosel destacados</section>
+      <SectionOutstanding/>
       {/* carrosel de productos de moda, ropa, zapato, etc */}
       <section>carrosel moda</section>
     </section>

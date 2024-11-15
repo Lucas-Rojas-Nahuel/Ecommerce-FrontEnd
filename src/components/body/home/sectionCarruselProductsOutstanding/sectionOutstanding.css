@@ -1,4 +1,4 @@
-.section-discount {
+.section-outstanding {
   background: linear-gradient(150deg, var(--green-blue), var(--green-lima));
   width: 100%;
   margin: 0;
@@ -44,41 +44,41 @@
   border-radius: 10px;
 }
 
-@media (max-width: 600px){
-    .section-discount{
-        padding: 10px;
-        height: auto;
-    }
-    .section-title{
-        gap: 15px;
-    }
-    .title{
-        padding-left: 0;
-    }
+@media (max-width: 600px) {
+  .section-outstanding {
+    padding: 10px;
+    height: auto;
+  }
 
-    .section-tarject-products{
-        padding: 5px;
-        height: auto;
-    }
-    
-    .section-title a{
-      display: none;
-    }
-  
-    .section-link{
-      display: block;
-    }
-  
-    .section-link a{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 5px 10px;
-      margin: 0 10px;
-      text-decoration: none;
-      font-size: 18px;
-      color: white;
-      height: 30px;
-      border-top: 1px solid var(--dark);
-    }
+  .section-title {
+    gap: 15px;
+  }
+  .title {
+    padding-left: 0;
+  }
+
+  .section-tarject-products {
+    padding: 5px;
+    height: auto;
+  }
+
+  .section-title a {
+    display: none;
+  }
+
+  .section-link {
+    display: block;
+  }
+
+  .section-link a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0px;
+    margin: 0 10px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    border-top: 1px solid var(--dark);
+  }
 }

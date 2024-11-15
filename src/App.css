@@ -1,0 +1,10 @@
+body{
+  box-sizing: border-box;
+  display: inline;
+}
+
+#root {
+  width: 100%;
+  text-align: center;
+}
+

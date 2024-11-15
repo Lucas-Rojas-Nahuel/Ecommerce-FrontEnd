@@ -1,0 +1,12 @@
+.section-home{
+    margin-top: 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+@media (max-width:600px){
+    .section-home{
+        margin-top: 0px;
+    }
+}

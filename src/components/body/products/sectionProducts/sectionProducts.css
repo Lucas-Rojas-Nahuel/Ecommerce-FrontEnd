@@ -1,0 +1,23 @@
+.section-products{
+    background-color: blueviolet;
+    width: 70%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+
+}
+
+.content-card{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.prueba{
+    margin: 0;
+    height: 330px;
+    background-color: blue;
+    border-radius: 10px;
+}
+

@@ -1,0 +1,16 @@
+.products{
+    margin-top: 100px;
+    background-color: red;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items:start;
+    box-sizing: border-box;
+}
+
+
+@media (max-width:600px){
+    .products{
+        margin-top: 60px;
+    }
+}

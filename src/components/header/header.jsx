@@ -9,9 +9,11 @@ import ContentResponsi from "./contentResponsi/contentResponsi";
 import NavLinkResponsi from "./navLinkResponsi/navLinkResponsi";
 import NavLinkk from "./navLink/navLink";
 
-export function Header() {
+import PropTypes from "prop-types";
+
+export function Header({toggleModal}) {
   //funcion para que al precionar el input del buscador cambie de color
-  const [isActive, setIsAtive] = useState(false);
+  const [isActive, setIsAtive] = useState(false); 
   const handlerFocus = () => {setIsAtive(true);};
   const handlerBlur = () => {setIsAtive(false);};
 
@@ -27,6 +29,7 @@ export function Header() {
   const [isActiveCategori, setIsActiveCategori] = useState(false);
   const handlerClickCategori = () => {setIsActiveCategori(!isActiveCategori);};
 
+  
   return (
     <section className="header">
       <SectionHeader
@@ -36,6 +39,7 @@ export function Header() {
         onBlur={handlerBlur}
         onClick2={handleClick}
         isVisible={isVisible}
+        toggleModal={toggleModal}
       />
 
       {/* para cuando se achica la pantalla */}
@@ -57,6 +61,12 @@ export function Header() {
           isActiveCategori={isActiveCategori}
         />
       )}
+
+      
     </section>
   );
+}
+
+Header.propTypes = {
+  toggleModal: PropTypes.func.isRequired
 }

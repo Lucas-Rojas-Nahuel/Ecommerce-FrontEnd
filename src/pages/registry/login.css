@@ -1,0 +1,68 @@
+.content-btn-close{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn-close{
+    background: none;
+    border: none;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+}
+
+.btn-close i {
+    background-color: gray;
+    text-align: center;
+    padding: 5px;
+    font-size: 10px;
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+}
+
+.content-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.content-text h2{
+    margin: 0;
+}
+
+.content-text p {
+    margin: 0;
+}
+
+.form-login{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.content-label-input{
+    display: flex;
+    flex-direction: column;
+}
+
+.content-label-input label{
+    text-align: left;
+}
+
+.content-label-input input{
+    height: 20px;
+}
+
+.submit-btn{
+    background-color: var(--green);
+    cursor: pointer;
+}
+
+.btn {
+    cursor: pointer;
+}

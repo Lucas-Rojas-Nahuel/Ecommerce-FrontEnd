@@ -48,6 +48,7 @@
 .content-label-input{
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .content-label-input label{

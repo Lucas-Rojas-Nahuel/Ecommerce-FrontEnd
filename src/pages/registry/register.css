@@ -1,0 +1,62 @@
+.content-label-input-responsi {
+    display: none;
+}
+
+.form-register{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.content-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.data-phone{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-register p {
+    text-align: start;
+    margin: 0
+    ;
+}
+
+.code-area-register{
+    width: 39%;
+}
+
+.phone-number-register{
+    width: 59%;
+}
+
+@media (max-width: 600px){
+    .content-data {
+        display: none;
+    }
+
+    .content-label-input-responsi {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .content-label-input-responsi label{
+        text-align: left;
+    }
+
+    .content-label-input-responsi input{
+        height: 20px;
+    }
+
+    
+
+    .data-phone{
+        gap: 5px;
+    }
+}

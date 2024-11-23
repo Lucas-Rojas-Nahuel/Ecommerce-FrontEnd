@@ -16,11 +16,11 @@ export default function Login({ toggleModal, toggleView }) {
       <form action="" className="form-login">
         <div className="content-label-input">
           <label htmlFor="email-login">Email</label>
-          <input type="email" id="email-login" />
+          <input type="email" id="email-login" required/>
         </div>
         <div className="content-label-input">
           <label htmlFor="password-login">Contraseña</label>
-          <input type="password" id="password-login" />
+          <input type="password" id="password-login" required/>
         </div>
         <button type="submit" className="submit-btn">
           CONTINUAR

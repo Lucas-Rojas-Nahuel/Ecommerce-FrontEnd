@@ -40,7 +40,7 @@ export default function Login({ toggleModal, toggleView, setIsAuthenticated }) {
     }
     window.location.reload()
     
-  };
+  }; 
 
   
 

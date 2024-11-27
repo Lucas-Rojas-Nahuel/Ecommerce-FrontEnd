@@ -3,7 +3,7 @@ import Register from "./register";
 import Login from "./login";
 import './registry.css'
 
-export default function Registry({toggleModal, toggleView, isRegisterView, setIsAuthenticated, role}) {
+export default function Registry({toggleModal, toggleView, isRegisterView, setIsAuthenticated}) {
   
   return (
     <div className="modal-overlay" onClick={(e) =>{
@@ -12,7 +12,7 @@ export default function Registry({toggleModal, toggleView, isRegisterView, setIs
     }}>
       <div className="model-content">
         {isRegisterView ? (
-            <Login toggleModal={toggleModal} toggleView={toggleView} setIsAuthenticated={setIsAuthenticated} role={role}/>
+            <Login toggleModal={toggleModal} toggleView={toggleView} setIsAuthenticated={setIsAuthenticated} />
         ) : (
             <Register toggleModal={toggleModal} toggleView={toggleView} setIsAuthenticated={setIsAuthenticated} />
         )}
@@ -26,5 +26,5 @@ Registry.propTypes = {
     toggleView: PropTypes.func.isRequired,
     isRegisterView: PropTypes.bool.isRequired,
     setIsAuthenticated: PropTypes.func.isRequired,
-    role: PropTypes.oneOfType([ PropTypes.string, PropTypes.oneOf([null]) ]),
+    
 }

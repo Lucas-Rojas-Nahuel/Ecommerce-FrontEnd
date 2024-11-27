@@ -64,7 +64,7 @@ function App() {
           toggleView={toggleView}
           isRegisterView={isRegisterView}
           setIsAuthenticated={setIsAuthenticated}
-          role={role}
+          
         />
       )}
       <Header

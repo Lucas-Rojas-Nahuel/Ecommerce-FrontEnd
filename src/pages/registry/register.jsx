@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./register.css";
 import axios from "axios";
 import { useState } from "react";
@@ -20,6 +20,8 @@ export default function Register({
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
+  const navigate = useNavigate();
 
   const handleChange = (e) =>
     setForm({
@@ -51,6 +53,7 @@ export default function Register({
         console.log(setIsAuthenticated);
         setIsAuthenticated(true);
         setSuccess("¡Registro exitoso! Ahora puedes iniciar sesión.");
+        navigate('/userView')
       } else {
         console.error(`token no encontrado en la respuesta`);
         setError(
@@ -61,6 +64,8 @@ export default function Register({
       console.error("Error en el registro", error);
       setError("Error en el registro");
     }
+    window.location.reload()
+    
   };
 
   return (

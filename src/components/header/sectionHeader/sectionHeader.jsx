@@ -12,13 +12,15 @@ export default function SectionHeader({
   onBlur,
   onClick2,
   isVisible, 
-  toggleModal
+  toggleModal,
+  setIsAuthenticated
 }) {
+  
   return (
     <section className="section-header">
       <ContentLogo onClick={onClick1} />
       <ContentSearches isActive={isActive} onFocus={onFocus} onBlur={onBlur} />
-      <ContentButton onClick={onClick2} isVisible={isVisible} toggleModal={toggleModal} />
+      <ContentButton onClick={onClick2} isVisible={isVisible} toggleModal={toggleModal}  setIsAuthenticated={setIsAuthenticated}/>
     </section>
   );
 }
@@ -30,5 +32,7 @@ SectionHeader.propTypes = {
   isVisible: PropTypes.bool.isRequired,
   onFocus: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
-  toggleModal: PropTypes.func.isRequired
+  toggleModal: PropTypes.func.isRequired,
+  
+  setIsAuthenticated: PropTypes.func.isRequired,
 };

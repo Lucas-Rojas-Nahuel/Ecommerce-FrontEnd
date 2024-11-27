@@ -1,9 +1,9 @@
 import "../components/body/home/home.css";
 import "@flaticon/flaticon-uicons/css/all/all.css";
 import "../styles/colorGlobal.css";
-import slide1 from "../../public/body/home/sectionCarrusel/slide1.jpeg";
-import slide2 from "../../public/body/home/sectionCarrusel/slide2.jpeg";
-import slide3 from "../../public/body/home/sectionCarrusel/slide3.jpeg";
+import slide1 from "../assets/sectionCarrusel/slide1.jpeg";
+import slide2 from "../assets/sectionCarrusel/slide2.jpeg";
+import slide3 from "../assets/sectionCarrusel/slide3.jpeg";
 import SectionDiscount from "../components/body/home/sectionCarruselProductsDiscount/sectionDiscount";
 import SectionCarrusel from "../components/body/home/sectionCarrusel/sectionCarrusel";
 import SectionOutstanding from "../components/body/home/sectionCarruselProductsOutstanding/sectionOutstanding";

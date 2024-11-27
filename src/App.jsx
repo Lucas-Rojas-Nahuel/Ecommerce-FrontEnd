@@ -1,16 +1,37 @@
 import "./App.css";
-
 import { Routes, Route } from "react-router-dom";
-import { Header } from "./components/header/header";
-import Home from "./pages/home";
-import Products from "./pages/products";
-import Offer from "./pages/offer";
-import Fashion from "./pages/fashion";
-import Household from "./pages/household";
-import Sell from "./pages/sell";
+import useUserRole from "./hooks/users/useUserRole.js";
 import { useState } from "react";
 
+//Paginas públicas
+import Home from "./pages/home";
+import Products from "./pages/products";
 import Registry from "./pages/registry/registry";
+import Offer from "./pages/offer";
+import ContactUs from "./pages/ContactUs.jsx";
+
+//Paginas de usuarios registrados
+import UserViews from "./pages/userViews/UserViews.jsx";
+import Sell from "./pages/userViews/sell.jsx";
+import WishList from "./pages/userViews/WishList.jsx";
+
+//paginas para administrador
+import AdminPanel from "./pages/AdminPanel/AdminPanel.jsx";
+import ControlPanel from "./pages/AdminPanel/ControlPanel.jsx";
+import ManageProducts from "./pages/AdminPanel/ManageProducts.jsx";
+import ManageOrders from "./pages/AdminPanel/ManageOrders.jsx";
+import ManageUsers from "./pages/AdminPanel/ManageUsers.jsx";
+import ManageDiscounts from "./pages/AdminPanel/ManageDiscounts.jsx";
+import ManageReviews from "./pages/AdminPanel/ManageReviews.jsx";
+
+//pagina para usuario y administrador
+import Profile from "./pages/Profile.jsx";
+
+//componentes globales
+import { Header } from "./components/header/header";
+
+//pagina no autorizada
+import Unauthorized from "./pages/Unauthorized.jsx";
 
 function App() {
   //funcion para que se muestre el login y el register
@@ -25,6 +46,16 @@ function App() {
     setIsRegisterView(!isRegisterView);
   };
 
+  //estado para ver el rol del usuario solo duevuelve true o false
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    !!localStorage.getItem("token")
+  );
+
+  //verificamos el rol
+  const { role } = useUserRole();
+  console.log(role);
+  console.log(isAuthenticated);
+
   return (
     <>
       {isMoldalOpen && (
@@ -32,16 +63,58 @@ function App() {
           toggleModal={toggleModal}
           toggleView={toggleView}
           isRegisterView={isRegisterView}
+          setIsAuthenticated={setIsAuthenticated}
+          role={role}
         />
       )}
-      <Header toggleModal={toggleModal} />
+      <Header
+        toggleModal={toggleModal}
+        setIsAuthenticated={setIsAuthenticated}
+      />
       <Routes>
-        <Route path="/home" element={<Home />}></Route>
-        <Route path="/products" element={<Products />}></Route>
-        <Route path="/offer" element={<Offer />}></Route>
-        <Route path="/fashion" element={<Fashion />}></Route>
-        <Route path="/household" element={<Household />}></Route>
-        <Route path="/sell" element={<Sell />}></Route>
+        {isAuthenticated ? (
+          <>
+            {/* Rutas para usuarios */}
+            {role === "user" && (
+              <>
+                <Route path="/userView"element={<UserViews setIsAuthenticated={setIsAuthenticated} />}/>
+                <Route path="/profile" element={<Profile s etIsAuthenticated={setIsAuthenticated} />}/>
+                <Route path="/home" element={<Home />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/offer" element={<Offer />} />
+                <Route path="/sell" element={<Sell />} />
+                <Route path="/wishList" element={<WishList />} />
+              </>
+            )}
+
+            {/* Rutas para administradores */}
+            {role === "admin" && (
+              <>
+                <Route path="/adminView" element={<AdminPanel setIsAuthenticated={setIsAuthenticated} />}/>
+                <Route path="/profile" element={<Profile setIsAuthenticated={setIsAuthenticated} />}/>
+                <Route path="/controlPanel" element={<ControlPanel />}/>
+                <Route path="/manageProducts" element={<ManageProducts />}/>
+                <Route path="/manageOrders" element={<ManageOrders />}/>
+                <Route path="/manageUsers" element={<ManageUsers />}/>
+                <Route path="/manageDiscounts" element={<ManageDiscounts />}/>
+                <Route path="/manageReviews" element={<ManageReviews />}/>
+              </>
+            )}
+          </>
+        ) : (
+          <>
+            {/* Rutas públicas */}
+            {!role && (
+              <>
+                <Route path="/home" element={<Home />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/offer" element={<Offer />} />
+                <Route path="/contactUs" element={<ContactUs />} />
+                <Route path="*" element={<Unauthorized />} />
+              </>
+            )}
+          </>
+        )}
       </Routes>
     </>
   );

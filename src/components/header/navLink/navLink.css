@@ -89,13 +89,17 @@
     transition: background-color 0.5s;
 }
 
+.menu-false{
+    display: none;
+}
+
 .nav-list a:hover{
     background-color: var(--dark-green);
     color: var(--white);
 }
 
 
-@media (max-width:600px){
+@media (max-width: 600px){
     .nav-link{
         display: none;
     }

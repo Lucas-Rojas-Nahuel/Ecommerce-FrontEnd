@@ -11,7 +11,7 @@ import NavLinkk from "./navLink/navLink";
 
 import PropTypes from "prop-types";
 
-export function Header({toggleModal}) {
+export function Header({toggleModal, setIsAuthenticated}) {
   //funcion para que al precionar el input del buscador cambie de color
   const [isActive, setIsAtive] = useState(false); 
   const handlerFocus = () => {setIsAtive(true);};
@@ -40,8 +40,9 @@ export function Header({toggleModal}) {
         onClick2={handleClick}
         isVisible={isVisible}
         toggleModal={toggleModal}
+        setIsAuthenticated={setIsAuthenticated}
       />
-
+      
       {/* para cuando se achica la pantalla */}
       {isVisible && (
         <ContentResponsi
@@ -68,5 +69,7 @@ export function Header({toggleModal}) {
 }
 
 Header.propTypes = {
-  toggleModal: PropTypes.func.isRequired
+  toggleModal: PropTypes.func.isRequired,
+  
+  setIsAuthenticated:PropTypes.func.isRequired
 }

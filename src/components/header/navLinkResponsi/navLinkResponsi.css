@@ -39,6 +39,10 @@
         height: 35px;
     }
 
+    .nav-list-responsi-none{
+        display: none;
+    }
+
     .nav-list-responsi:hover, .nav-list-responsi-color:hover{
         background-color: var(--apple-green);
     }

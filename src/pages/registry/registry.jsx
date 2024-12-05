@@ -2,19 +2,23 @@ import PropTypes from "prop-types";
 import Register from "./register";
 import Login from "./login";
 import './registry.css'
+import { useSelector } from "react-redux";
 
-export default function Registry({toggleModal, toggleView, isRegisterView, setIsAuthenticated}) {
+export default function Registry({setIsAuthenticated, }) {
   
+  const isRegisterView = useSelector((state) => state.btnModal.isRegisterView)
+  
+
   return (
     <div className="modal-overlay" onClick={(e) =>{
         e.stopPropagation();
-        toggleModal;
+         
     }}>
       <div className="model-content">
         {isRegisterView ? (
-            <Login toggleModal={toggleModal} toggleView={toggleView} setIsAuthenticated={setIsAuthenticated} />
+            <Login  setIsAuthenticated={setIsAuthenticated} />
         ) : (
-            <Register toggleModal={toggleModal} toggleView={toggleView} setIsAuthenticated={setIsAuthenticated} />
+            <Register  setIsAuthenticated={setIsAuthenticated} />
         )}
       </div>
     </div>
@@ -22,9 +26,6 @@ export default function Registry({toggleModal, toggleView, isRegisterView, setIs
 }
 
 Registry.propTypes = {
-    toggleModal: PropTypes.func.isRequired,
-    toggleView: PropTypes.func.isRequired,
-    isRegisterView: PropTypes.bool.isRequired,
     setIsAuthenticated: PropTypes.func.isRequired,
     
 }

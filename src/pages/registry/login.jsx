@@ -3,9 +3,15 @@ import "./login.css";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setButtonInactive, setRegistryInactive } from "../../features/button/buttonModal";
+ 
 
 
-export default function Login({ toggleModal, toggleView, setIsAuthenticated }) {
+
+export default function Login({ setIsAuthenticated }) {
+  const dispatch = useDispatch();
+  
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
@@ -15,14 +21,14 @@ export default function Login({ toggleModal, toggleView, setIsAuthenticated }) {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/auth/login",
+        "http://localhost:3000/api/v1/usuarios/login",
         form
       );
+      console.log(response)
       localStorage.setItem("token", response.data.token);
       setIsAuthenticated(true);
-      console.log(response);
-      const role = response.data.user._doc.role;
-      console.log(response.data.user._doc.role)
+      const role = response.data.usuario.esAdmin
+      
       if(role == 'admin'){
         navigate('/adminView')
       }else if(role == 'user'){
@@ -30,24 +36,22 @@ export default function Login({ toggleModal, toggleView, setIsAuthenticated }) {
       } else{
         navigate('/home')
       }
-
+ 
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        alert("usuario no encontrado. Por favor, resgistrate.");
+        console.error("usuario no encontrado. Por favor, resgistrate.");
       } else {
-        alert("el usuario no existe, debe registrarse");
+        console.error("el usuario no existe, debe registrarse");
       }
     }
-    window.location.reload()
     
+      window.location.reload()  
   }; 
-
-  
 
   return (
     <>
       <div className="content-btn-close">
-        <button className="btn-close" type="button" onClick={toggleModal}>
+        <button className="btn-close" type="button" onClick={()=> dispatch(setButtonInactive())}>
           <i className="fi fi-br-cross"></i>
         </button>
       </div>
@@ -90,7 +94,7 @@ export default function Login({ toggleModal, toggleView, setIsAuthenticated }) {
           CONTINUAR
         </button>
       </form>
-      <button type="button" onClick={toggleView} className="btn">
+      <button type="button" onClick={() => dispatch(setRegistryInactive())} className="btn">
         CREAR CUENTA
       </button>
     </>
@@ -98,8 +102,7 @@ export default function Login({ toggleModal, toggleView, setIsAuthenticated }) {
 }
 
 Login.propTypes = {
-  toggleModal: PropTypes.func.isRequired,
-  toggleView: PropTypes.func.isRequired,
+  
   setIsAuthenticated: PropTypes.func.isRequired,
   
 };

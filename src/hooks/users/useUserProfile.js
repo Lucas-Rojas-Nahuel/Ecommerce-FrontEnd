@@ -7,12 +7,12 @@ const useUserProfile = (setIsAutheticated) => {
   const [laoding, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  
   useEffect(() => {
     const fetchProfile = async () => {
       const token = localStorage.getItem("token");
-
+      
       if (!token) {
-        console.error("token no encontrado");
         setError("Token no encontrado");
         setIsAutheticated(false);
         setLoading(false);
@@ -21,18 +21,22 @@ const useUserProfile = (setIsAutheticated) => {
 
       try {
         const decodedToken = jwtDecode(token);
-        if (!decodedToken || !decodedToken.id) {
+       
+        if (!decodedToken || !decodedToken.usuarioId) {
           throw new Error("token invalido o incompleto");
         }
 
-        const userId = decodedToken.id;
+        const userId = decodedToken.usuarioId;
+        
         const response = await axios.get(
-          `http://localhost:3001/users/${userId}`,
+          
+          `http://localhost:3000/api/v1/usuarios/${userId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        setProfile(response.data.user);
+        
+        setProfile(response.data);
       } catch (error) {
         console.error("error al decodificar el token: ", error);
         setError("Error al obtener el perfil del usuario");

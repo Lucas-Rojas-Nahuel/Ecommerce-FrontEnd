@@ -1,27 +1,26 @@
-import PropTypes from "prop-types";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./register.css";
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  setButtonInactive,
+  setRegistryActive,
+} from "../../features/button/buttonModal";
 
-export default function Register({
-  toggleModal,
-  toggleView,
-  setIsAuthenticated,
-}) {
+export default function Register() {
+  const dispatch = useDispatch();
+
   const [form, setForm] = useState({
-    name: "",
+    nombre: "",
     username: "",
     email: "",
     password: "",
-    role: "user",
+    isAdmin: "user",
   });
 
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
-  const navigate = useNavigate();
 
   const handleChange = (e) =>
     setForm({
@@ -42,36 +41,26 @@ export default function Register({
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/auth/register",
+        "http://localhost:3000/api/v1/usuarios",
         form
       );
-
-      const token = await response.data.token;
-      console.log(token);
-      if (token) {
-        localStorage.setItem("token", token);
-        console.log(setIsAuthenticated);
-        setIsAuthenticated(true);
-        setSuccess("¡Registro exitoso! Ahora puedes iniciar sesión.");
-        navigate('/userView')
-      } else {
-        console.error(`token no encontrado en la respuesta`);
-        setError(
-          "Hubo un problema al registrar el usuario. Intenta nuevamente."
-        );
-      }
+      console.log(response);
+      alert("¡Registro exitoso! Ahora puedes iniciar sesión.");
+      dispatch(setRegistryActive());
     } catch (error) {
       console.error("Error en el registro", error);
       setError("Error en el registro");
     }
-    window.location.reload()
-    
   };
 
   return (
     <>
       <div className="content-btn-close">
-        <button className="btn-close" type="button" onClick={toggleModal}>
+        <button
+          className="btn-close"
+          type="button"
+          onClick={() => dispatch(setButtonInactive())}
+        >
           <i className="fi fi-br-cross"></i>
         </button>
       </div>
@@ -79,7 +68,6 @@ export default function Register({
         <h2>Registrarse</h2>
         <p>Ingresá tus datos para crear tu cuenta</p>
         {error && <p className="error">{error}</p>}
-        {success && <p className="success">{success}</p>}
       </div>
       <form
         onSubmit={(e) => {
@@ -94,8 +82,8 @@ export default function Register({
             <input
               type="text"
               id="name-register"
-              name="name"
-              value={form.name}
+              name="nombre"
+              value={form.nombre}
               onChange={handleChange}
               required
             />
@@ -156,14 +144,8 @@ export default function Register({
 
       <p>
         ¿Ya tenés cuenta? Inicia sesión{" "}
-        <NavLink onClick={toggleView}>aca</NavLink>
+        <NavLink onClick={() => dispatch(setRegistryActive())}>aca</NavLink>
       </p>
     </>
   );
 }
-
-Register.propTypes = {
-  toggleModal: PropTypes.func.isRequired,
-  toggleView: PropTypes.func.isRequired,
-  setIsAuthenticated: PropTypes.func.isRequired,
-};

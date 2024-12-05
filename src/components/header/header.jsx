@@ -1,6 +1,6 @@
 import "@flaticon/flaticon-uicons/css/all/all.css";
 import "../../styles/colorGlobal.css";
-import './header.css'
+import "./header.css";
 
 import { useState } from "react";
 import SectionHeader from "./sectionHeader/sectionHeader";
@@ -11,65 +11,71 @@ import NavLinkk from "./navLink/navLink";
 
 import PropTypes from "prop-types";
 
-export function Header({toggleModal, setIsAuthenticated}) {
+export function Header({ setIsAuthenticated }) {
   //funcion para que al precionar el input del buscador cambie de color
-  const [isActive, setIsAtive] = useState(false); 
-  const handlerFocus = () => {setIsAtive(true);};
-  const handlerBlur = () => {setIsAtive(false);};
+  const [isActive, setIsAtive] = useState(false);
+  const handlerFocus = () => {
+    setIsAtive(true);
+  };
+  const handlerBlur = () => {
+    setIsAtive(false);
+  };
 
   //funcion para mostrar el buscador
   const [isVisible, setIsVisible] = useState(false);
-  const handleClick = () => {setIsVisible(!isVisible);};
+  const handleClick = () => {
+    setIsVisible(!isVisible);
+  };
 
   //funcion para mostrar el menu
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const handlerClickMenu = () => {setIsMenuVisible(!isMenuVisible);};
+  const handlerClickMenu = () => {
+    setIsMenuVisible(!isMenuVisible);
+  };
 
   //funcion para el boton de categoria
   const [isActiveCategori, setIsActiveCategori] = useState(false);
-  const handlerClickCategori = () => {setIsActiveCategori(!isActiveCategori);};
+  const handlerClickCategori = () => {
+    setIsActiveCategori(!isActiveCategori);
+  };
 
-  
   return (
-    <section className="header">
-      <SectionHeader
-        onClick1={handlerClickMenu}
-        isActive={isActive}
-        onFocus={handlerFocus}
-        onBlur={handlerBlur}
-        onClick2={handleClick}
-        isVisible={isVisible}
-        toggleModal={toggleModal}
-        setIsAuthenticated={setIsAuthenticated}
-      />
-      
-      {/* para cuando se achica la pantalla */}
-      {isVisible && (
-        <ContentResponsi
+    <section className="section-header1">
+      <div className="header">
+        <SectionHeader 
+          onClick1={handlerClickMenu}
           isActive={isActive}
-          handlerFocus={handlerFocus}
-          handlerBlur={handlerBlur}
+          onFocus={handlerFocus}
+          onBlur={handlerBlur}
+          onClick2={handleClick}
+          isVisible={isVisible}
+          setIsAuthenticated={setIsAuthenticated}
         />
-      )}
 
-      <NavLinkk />
+        {/* para cuando se achica la pantalla */}
+        {isVisible && (
+          <ContentResponsi
+            isActive={isActive}
+            handlerFocus={handlerFocus}
+            handlerBlur={handlerBlur}
+          />
+        )}
 
-      {/* para cuando se achica la pantalla */}
-      {isMenuVisible && (
-        <NavLinkResponsi
-          isMenuVisible={isMenuVisible}
-          handlerClickCategori={handlerClickCategori}
-          isActiveCategori={isActiveCategori}
-        />
-      )}
+        <NavLinkk />
 
-      
+        {/* para cuando se achica la pantalla */}
+        {isMenuVisible && (
+          <NavLinkResponsi
+            isMenuVisible={isMenuVisible}
+            handlerClickCategori={handlerClickCategori}
+            isActiveCategori={isActiveCategori}
+          />
+        )}
+      </div>
     </section>
   );
 }
 
 Header.propTypes = {
-  toggleModal: PropTypes.func.isRequired,
-  
-  setIsAuthenticated:PropTypes.func.isRequired
-}
+  setIsAuthenticated: PropTypes.func.isRequired,
+};

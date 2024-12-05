@@ -26,4 +26,11 @@ body {
   min-height: 100vh;
 }
 
+#root{
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  background-color: red;
+}
+
 

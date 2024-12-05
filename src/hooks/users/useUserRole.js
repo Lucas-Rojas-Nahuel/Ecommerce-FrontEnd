@@ -20,6 +20,7 @@ const useUserRole = () => {
 
             try {
                 const decodedToken = jwtDecode(token)
+                    
                     if(!decodedToken || !decodedToken.role){
                         throw new Error('token invalido o incompleto');
                     }

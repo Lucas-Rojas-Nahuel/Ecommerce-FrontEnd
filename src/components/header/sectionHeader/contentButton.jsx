@@ -4,14 +4,18 @@ import useUserRole from "../../../hooks/users/useUserRole";
 import useUserProfile from "../../../hooks/users/useUserProfile";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch} from "react-redux";
+import { setButtonActive} from "../../../features/button/buttonModal";
 
 
 export function ContentButton({
   onClick,
   isVisible,
-  toggleModal,
   setIsAuthenticated,
 }) {
+  const dispatch = useDispatch();
+  
+
   const { role } = useUserRole();
   const { profile } = useUserProfile(setIsAuthenticated);
   const [isOpen, setIsOpen] = useState(false);
@@ -42,14 +46,14 @@ export function ContentButton({
         {profile ? (
           <button onClick={toggleDropdown} className="btn-users dropdown-button">
             <i className="fi fi-sr-user"></i>
-            {role ? <p>{profile.name}</p> : <p>Ingresar</p>}
+            {role ? <p>{profile.nombre}</p> : <p>Ingresar</p>}
           </button>
         ) : (
           <button
             className="btn-users"
             onClick={(e) => {
               e.preventDefault();
-              toggleModal();
+              dispatch(setButtonActive())
             }} 
           >
             <i className="fi fi-sr-user"></i>
@@ -82,6 +86,5 @@ export function ContentButton({
 ContentButton.propTypes = {
   onClick: PropTypes.func.isRequired, // Especifica que onClick1 es una función y es requerida
   isVisible: PropTypes.bool.isRequired,
-  toggleModal: PropTypes.func.isRequired,
   setIsAuthenticated: PropTypes.func.isRequired,
 };

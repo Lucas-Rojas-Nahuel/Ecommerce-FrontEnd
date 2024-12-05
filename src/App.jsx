@@ -37,6 +37,7 @@ import EditUser from "./components/body/adminPanel/ManageUsers/EditUser.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProductInfo from "./components/body/products/productInformation/ProductInfo.jsx";
 import { useSelector } from "react-redux";
+import Footer from "./pages/footer.jsx";
 
 function App() {
   //funcion para que se muestre el login y el register
@@ -122,6 +123,7 @@ function App() {
           </>
         )}
       </Routes>
+      <Footer/>
     </AuthProvider>
   );
 }

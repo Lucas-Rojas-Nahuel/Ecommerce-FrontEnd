@@ -4,7 +4,7 @@ import "./ManageUsers.css";
 
 export default function ManageUsers() {
   const { users, loading, error, deleteUser } = useUserCrud(
-    "http://localhost:3000/api/v1/usuarios"
+    "http://localhost:3001/api/v1/usuarios"
   );
 
   const navigate = useNavigate();

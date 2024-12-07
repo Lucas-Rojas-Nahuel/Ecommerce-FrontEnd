@@ -73,7 +73,7 @@ export function ContentButton({
         )}
       </div>
 
-      {role === "user" ? (
+      {role != "admin" ? (
         <a href="" className="shopping">
           <i className="fi fi-ss-shopping-cart"></i>
         </a>

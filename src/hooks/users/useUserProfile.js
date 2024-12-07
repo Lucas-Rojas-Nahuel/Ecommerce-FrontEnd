@@ -30,7 +30,7 @@ const useUserProfile = (setIsAutheticated) => {
         
         const response = await axios.get(
           
-          `http://localhost:3000/api/v1/usuarios/${userId}`,
+          `http://localhost:3001/api/v1/usuarios/${userId}`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

@@ -1,90 +1,147 @@
-import { useState } from "react";
-import useProductCrud from "../../../../hooks/products/useProductCrud";
+/* eslint-disable no-unused-vars */
+
 import "./sectionOptions.css";
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addFilter,
+  filterByCategory,
+  loadMarcas,
+  removeFilter,
+  sortProducts,
+  updateProductsCopy,
+} from "../../../../slices/productsSlice";
+import React from "react";
 
-export default function SectionOptions({onFilterChange}) {
-  const { products, loading, error} = useProductCrud(
-    "http://localhost:3001/api/v1/productos"
-  );
-  const [filters, setFilters] = useState({ categoria: [], marca: [] });
+export default function SectionOptions() {
+  const allProducts = useSelector((state) => state.products.allProducts);
+  const mar = useSelector((state) => state.products.marca);
+  const cate = useSelector((state) => state.products.categoria);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
     if (checked) {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        [name]: [...prevFilters[name], value],
-      }));
+      dispatch(addFilter({ name, value }));
     } else {
-      setFilters((prevFilters) => ({
-        ...prevFilters,
-        [name]: prevFilters[name].filter(
-          (filterValue) => filterValue !== value
-        ),
-      }));
+      dispatch(removeFilter({ name, value }));
     }
   };
 
+  const handleRemove = () => {
+    
+  }
+
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    onFilterChange(filters)
+    if(!mar.length){
+      dispatch(loadMarcas(marca))
+    }
+     
+    dispatch(filterByCategory({ mar, cate }));
+    
   };
 
-  const handleClearFilters = () => {
-    const clearedFilters = {categoria: [], marca: []};
-    setFilters(clearedFilters);
-    onFilterChange(clearedFilters);
-  }
+  const categories = Array.from(
+    new Set(allProducts.map((product) => product.categoria))
+  );
+
+  const productsFilteredByCategory = allProducts.filter((producto) =>
+    cate.includes(producto.categoria)
+  );
+
+  const brandFilteredProducts = allProducts.filter((product) =>
+    mar.includes(product.marca)
+  );
+
+  const marca = Array.from(
+    new Set(allProducts.map((product) => product.marca))
+  );
+
+ 
+
+  const handleSort = (e) => {
+    dispatch(sortProducts(e.target.value));
+  };
 
   return (
     <section className="section-options">
-      {loading && <div>Cargando...</div>}{" "}
-      {error && <div>Error: {error.message}</div>}
+      <h4>Ordenamiento</h4>
+      <select onChange={handleSort}>
+        <option value="asc">Menor a Mayor</option>
+        <option value="desc">Mayor a Menor</option>
+      </select>
+
       <h3>Categorias</h3>
       {/* tengo que modificar el componente CategoryOption  */}
+
       <form onSubmit={handleSubmit}>
         <ul>
-          <li>Marca</li>
-          {[...new Set(products.map((marca) => marca.marca))].map(
-            (marcaUnica, index) => (
-              <li key={index}>
-                <input
-                  type="checkbox"
-                  name="marca"
-                  value={marcaUnica}
-                  checked={filters.marca.includes(marcaUnica)}
-                  onChange={handleChange}
-                />
-                {marcaUnica}
-              </li>
-            )
-          )}
+          <li>Categoria</li>
+
+          {categories.map((categoriaUnica, index) => (
+            <li key={index}>
+              <input
+                type="checkbox"
+                name="categoria"
+                value={categoriaUnica}
+                onChange={handleChange}
+              />
+              {categoriaUnica}
+            </li>
+          ))}
         </ul>
         <ul>
-          <li>Categoria</li>
-          {[...new Set(products.map((categoria) => categoria.categoria))].map(
-            (categoriaUnica, index) => (
-              <li key={index}>
-                <input
-                  type="checkbox"
-                  name="categoria"
-                  value={categoriaUnica}
-                  checked={filters.categoria.includes(categoriaUnica)}
-                  onChange={handleChange}
-                />
-                {categoriaUnica}
-              </li>
-            )
+          {cate.length ? (
+            <>
+              <li>Marca</li>
+              {cate.length
+                ? cate.map((catego) => (
+                    <React.Fragment key={cate}>
+                      <li>{catego}</li>
+                      {productsFilteredByCategory.map((marcaUnica, index) => (
+                        <>
+                          {catego === marcaUnica.categoria ? (
+                            <li key={index}>
+                              <input
+                                type="checkbox"
+                                name="marca"
+                                value={marcaUnica.marca}
+                                onChange={handleChange}
+                              />
+                              {marcaUnica.marca}
+                            </li>
+                          ) : (
+                            ""
+                          )}
+                        </>
+                      ))}
+                    </React.Fragment>
+                  ))
+                : marca.map((marcaUnica, index) => (
+                    <li key={index}>
+                      <input
+                        type="checkbox"
+                        name="marca"
+                        value={marcaUnica}
+                        onChange={handleChange}
+                      />
+                      {marcaUnica}
+                    </li>
+                  ))}
+            </>
+          ) : (
+            ""
           )}
         </ul>
         <button type="submit">Filtrar</button>
-        <button type="button" onClick={handleClearFilters}>Quitar Filtro</button>
+        <button type="button">Quitar Filtro</button>
       </form>
     </section>
   );
 }
 
 SectionOptions.propTypes = {
-   onFilterChange: PropTypes.func.isRequired, 
-  };
+  onFilterChange: PropTypes.func.isRequired,
+};

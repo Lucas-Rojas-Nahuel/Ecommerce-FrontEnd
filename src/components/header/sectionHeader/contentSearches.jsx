@@ -1,7 +1,18 @@
 import PropTypes from "prop-types";
 import './contentSearches.css'
+import { useDispatch, useSelector } from "react-redux";
+import { setSearchText } from "../../../slices/searchSlice";
 
 export default function ContentSearches({isActive,onFocus, onBlur}) {
+  const dispatch = useDispatch();
+  const searchText = useSelector((state)=> state.search.text);
+
+  
+
+  const handleChange = (e) => {
+    dispatch(setSearchText(e.target.value));
+  };
+
   return (
     <div className={`content-searches ${isActive ? "input-active" : ""}`}>
       <input
@@ -9,6 +20,8 @@ export default function ContentSearches({isActive,onFocus, onBlur}) {
         id="search"
         type="text"
         placeholder="Buscar productos"
+        value={searchText}
+        onChange={handleChange}
         onFocus={onFocus}
         onBlur={onBlur}
       />

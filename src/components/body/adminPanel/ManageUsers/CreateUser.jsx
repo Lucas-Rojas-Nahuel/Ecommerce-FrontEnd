@@ -3,7 +3,7 @@ import useUserCrud from "../../../../hooks/users/useUserCrud";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateUser() {
-    const {createUser} = useUserCrud('http://localhost:3000/api/v1/usuarios')
+    const {createUser} = useUserCrud('http://localhost:3001/api/v1/usuarios')
   const [formData, setFormData] = useState({
     nombre: "",
     username: "",

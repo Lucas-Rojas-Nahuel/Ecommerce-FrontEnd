@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useUserCrud from "../../../../hooks/users/useUserCrud";
 
 export default function EditUser() {
-  const { users, updateUser } = useUserCrud("http://localhost:3000/api/v1/usuarios");
+  const { users, updateUser } = useUserCrud("http://localhost:3001/api/v1/usuarios");
   const { id } = useParams();
   const [formData, setFormData] = useState({
     nombre: "",

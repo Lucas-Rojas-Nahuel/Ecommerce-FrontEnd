@@ -41,7 +41,7 @@ export default function Register() {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/v1/usuarios",
+        "http://localhost:3001/api/v1/usuarios",
         form
       );
       console.log(response);

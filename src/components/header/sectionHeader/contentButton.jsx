@@ -4,7 +4,7 @@ import useUserRole from "../../../hooks/users/useUserRole";
 import useUserProfile from "../../../hooks/users/useUserProfile";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { setButtonActive} from "../../../features/button/buttonModal";
 
 
@@ -32,6 +32,12 @@ export function ContentButton({
     navigate('/home')
     window.location.reload();
   };
+
+  const cart = useSelector(state => state.cart)
+
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0)
+  
+
 
   return (
     <div className="content-button">
@@ -74,9 +80,10 @@ export function ContentButton({
       </div>
 
       {role != "admin" ? (
-        <a href="" className="shopping">
+        <NavLink to={'/cart'} className="shopping">
           <i className="fi fi-ss-shopping-cart"></i>
-        </a>
+          {cartItemCount > 0 && <span className="span-count">{cartItemCount}</span>}
+        </NavLink>
       ) : (
         ""
       )}

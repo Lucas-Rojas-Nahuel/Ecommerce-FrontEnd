@@ -38,6 +38,7 @@ import { AuthProvider } from "./context/AuthContext.jsx";
 import ProductInfo from "./components/body/products/productInformation/ProductInfo.jsx";
 import { useSelector } from "react-redux";
 import Footer from "./pages/footer.jsx";
+import Cart from "./components/body/Cart/Cart.jsx";
 
 function App() {
   //funcion para que se muestre el login y el register
@@ -80,6 +81,7 @@ function App() {
                 <Route path="/offer" element={<Offer />} />
                 <Route path="/sell" element={<Sell />} />
                 <Route path="/wishList" element={<WishList />} />
+                <Route path="/cart" element={<Cart />} />
               </>
             )}
 
@@ -118,6 +120,7 @@ function App() {
                 <Route path="/offer" element={<Offer />} />
                 <Route path="/contactUs" element={<ContactUs />} />
                 <Route path="*" element={<Unauthorized />} />
+                <Route path="/cart" element={<Cart />} />
               </>
             )}
           </>

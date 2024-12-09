@@ -18,6 +18,9 @@
 .shopping {
   text-decoration: none;
   color: var(--apple-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .content-icon-search {
@@ -71,6 +74,13 @@
 
 .dropdownItem:hover{
     background-color:blue ;
+}
+
+.span-count{
+  background-color: red;
+  border-radius: 50%;
+  padding: 3px;
+  font-size: 10px;
 }
 
 @media (max-width: 600px) {

@@ -1,6 +1,19 @@
-.section-options{
-    width: 30%;
+.section-options, .padre{
+    position: relative;
     height: 100%;
+    width: 280px;
+    overflow: hidden;
+     
+}
+    
+.div-options, .hijo{
+    position: absolute;
+    top: 10;
+    left: 10;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+     
 }

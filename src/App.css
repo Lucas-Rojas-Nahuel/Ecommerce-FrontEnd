@@ -1,13 +1,20 @@
-body{
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
   box-sizing: border-box;
   display: inline;
+  place-items: center;
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 #root {
-  width: 100%;
-  height: 100%;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
   text-align: center;
 }
-
-
-

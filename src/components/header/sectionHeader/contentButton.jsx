@@ -1,23 +1,27 @@
 import PropTypes from "prop-types";
 import "./contentButton.css";
 import useUserRole from "../../../hooks/users/useUserRole";
-import useUserProfile from "../../../hooks/users/useUserProfile";
+
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector} from "react-redux";
 import { setButtonActive} from "../../../features/button/buttonModal";
+import { logout } from "../../../slices/authSlice";
 
 
 export function ContentButton({
   onClick,
   isVisible,
-  setIsAuthenticated,
+  
 }) {
   const dispatch = useDispatch();
   
 
   const { role } = useUserRole();
-  const { profile } = useUserProfile(setIsAuthenticated);
+  const { profile } = useSelector(
+    (state) => state.auth
+  );
+   
   const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -27,8 +31,7 @@ export function ContentButton({
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    setIsAuthenticated(false);
+    dispatch(logout())
     navigate('/home')
     window.location.reload();
   };
@@ -93,5 +96,4 @@ export function ContentButton({
 ContentButton.propTypes = {
   onClick: PropTypes.func.isRequired, // Especifica que onClick1 es una función y es requerida
   isVisible: PropTypes.bool.isRequired,
-  setIsAuthenticated: PropTypes.func.isRequired,
-};
+}

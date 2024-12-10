@@ -7,11 +7,11 @@ const initialState = {
 
 const buttonModal = createSlice({
     name:'buttonModal',
-    initialState,
+    initialState, 
     reducers: {
         toggleButton: (state) => {
             state.isActive = !state.isActive;
-        },
+        }, 
         setButtonActive: (state) => {
             state.isActive = true;
         },

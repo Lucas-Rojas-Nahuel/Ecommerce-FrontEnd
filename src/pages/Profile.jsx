@@ -2,14 +2,17 @@
 import { useEffect, useState } from "react";
 import jwtDecode from "jwt-decode"; */
 
-import PropTypes from "prop-types";
-import useUserProfile from "../hooks/users/useUserProfile";
+ 
+ 
+import { useSelector } from "react-redux";
 
 
 
-export default function Profile({ setIsAuthenticated}) {
-  const {profile} = useUserProfile(setIsAuthenticated)
+export default function Profile() {
   
+  const { profile } = useSelector(
+    (state) => state.auth
+  );
   
 
   return (
@@ -27,6 +30,4 @@ export default function Profile({ setIsAuthenticated}) {
   );
 }
 
-Profile.propTypes = {
-  setIsAuthenticated: PropTypes.func.isRequired,
-};
+ 

@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+
 import "./login.css";
 import { useState } from "react";
 import axios from "axios";
@@ -9,7 +9,7 @@ import { setButtonInactive, setRegistryInactive } from "../../features/button/bu
 
 
 
-export default function Login({ setIsAuthenticated }) {
+export default function Login() {
   const dispatch = useDispatch();
   
   const [form, setForm] = useState({ email: "", password: "" });
@@ -26,7 +26,7 @@ export default function Login({ setIsAuthenticated }) {
       );
       console.log(response)
       localStorage.setItem("token", response.data.token);
-      setIsAuthenticated(true);
+      
       const role = response.data.usuario.esAdmin
       
       if(role == 'admin'){
@@ -103,6 +103,6 @@ export default function Login({ setIsAuthenticated }) {
 
 Login.propTypes = {
   
-  setIsAuthenticated: PropTypes.func.isRequired,
+  
   
 };

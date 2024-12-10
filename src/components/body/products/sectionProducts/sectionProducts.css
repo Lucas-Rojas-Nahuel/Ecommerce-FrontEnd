@@ -1,10 +1,12 @@
 .section-products{
     background-color: blueviolet;
-    width: 70%;
     height: 100%;
     padding: 20px;
+    flex-grow: 1;
     box-sizing: border-box;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .content-card{
@@ -15,10 +17,5 @@
     gap: 20px;
 }
 
-.prueba{
-    margin: 0;
-    height: 330px;
-    background-color: blue;
-    border-radius: 10px;
-}
+ 
 

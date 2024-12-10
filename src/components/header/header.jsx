@@ -9,9 +9,9 @@ import ContentResponsi from "./contentResponsi/contentResponsi";
 import NavLinkResponsi from "./navLinkResponsi/navLinkResponsi";
 import NavLinkk from "./navLink/navLink";
 
-import PropTypes from "prop-types";
+ 
 
-export function Header({ setIsAuthenticated }) {
+export function Header( ) {
   //funcion para que al precionar el input del buscador cambie de color
   const [isActive, setIsAtive] = useState(false);
   const handlerFocus = () => {
@@ -41,41 +41,41 @@ export function Header({ setIsAuthenticated }) {
 
   return (
     <section className="section-header1">
-      <div className="header">
-        <SectionHeader 
-          onClick1={handlerClickMenu}
-          isActive={isActive}
-          onFocus={handlerFocus}
-          onBlur={handlerBlur}
-          onClick2={handleClick}
-          isVisible={isVisible}
-          setIsAuthenticated={setIsAuthenticated}
-        />
-
-        {/* para cuando se achica la pantalla */}
-        {isVisible && (
-          <ContentResponsi
+      <div className="section-div">
+        <div className="header">
+          <SectionHeader
+            onClick1={handlerClickMenu}
             isActive={isActive}
-            handlerFocus={handlerFocus}
-            handlerBlur={handlerBlur}
+            onFocus={handlerFocus}
+            onBlur={handlerBlur}
+            onClick2={handleClick}
+            isVisible={isVisible}
+             
           />
-        )}
 
-        <NavLinkk />
+          {/* para cuando se achica la pantalla */}
+          {isVisible && (
+            <ContentResponsi
+              isActive={isActive}
+              handlerFocus={handlerFocus}
+              handlerBlur={handlerBlur}
+            />
+          )}
 
-        {/* para cuando se achica la pantalla */}
-        {isMenuVisible && (
-          <NavLinkResponsi
-            isMenuVisible={isMenuVisible}
-            handlerClickCategori={handlerClickCategori}
-            isActiveCategori={isActiveCategori}
-          />
-        )}
+          <NavLinkk />
+
+          {/* para cuando se achica la pantalla */}
+          {isMenuVisible && (
+            <NavLinkResponsi
+              isMenuVisible={isMenuVisible}
+              handlerClickCategori={handlerClickCategori}
+              isActiveCategori={isActiveCategori}
+            />
+          )}
+        </div>
       </div>
     </section>
   );
 }
 
-Header.propTypes = {
-  setIsAuthenticated: PropTypes.func.isRequired,
-};
+

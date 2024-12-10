@@ -16,21 +16,8 @@
 
 
 
-body {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  place-items: center;
-  min-width: 100vw;
-  min-height: 100vh;
-}
+ 
 
-#root{
-  display: flex;
-  height: 100vh;
-  flex-direction: column;
-  background-color: red;
-}
+
 
 

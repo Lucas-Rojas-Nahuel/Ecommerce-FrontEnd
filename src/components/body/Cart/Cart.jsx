@@ -1,5 +1,3 @@
- 
-
 import { useDispatch, useSelector } from "react-redux";
 import "./Cart.css";
 import {
@@ -7,33 +5,45 @@ import {
   removeFromCart,
   updateQuantity,
 } from "../../../slices/cartSlice";
-import { NavLink } from "react-router-dom";
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import { setButtonActive } from "../../../features/button/buttonModal";
+
+
 initMercadoPago("APP_USR-df34c673-b2bb-4e26-8ec7-05cca3654e42");
-
-
 
 export default function Cart() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  
-  
-  const [preferenceId, setPreferenceId] = useState(null)
 
+  const {isAuthenticated } = useSelector(
+    (state) => state.auth
+  );
+
+   
+
+  
+
+  const navigate = useNavigate();
+
+  const [preferenceId, setPreferenceId] = useState(null);
 
   const createPreference = async () => {
     try {
-      const response =  await axios.post('http://localhost:3001/api/v1/create_preference', cart)
-      console.log(response.data)
-      
-      const {id} = response.data
-      return id
+      const response = await axios.post(
+        "http://localhost:3001/api/v1/create_preference",
+        cart
+      );
+      console.log(response.data);
+
+      const { id } = response.data;
+      return id;
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
-  }
+  };
 
   const handleRemove = (id) => {
     dispatch(removeFromCart(id));
@@ -52,10 +62,21 @@ export default function Cart() {
     dispatch(clearCart());
   };
 
-  const handleBuy= async () => {
-    const id = await createPreference()
-    id && setPreferenceId(id)
-  }
+  const handleBuy = async () => {
+    const id = await createPreference();
+    id && setPreferenceId(id);
+  };
+
+  const handleAccess = () => {
+    if (isAuthenticated) {
+      alert("acceso permitido");
+      navigate(`/product-orders`);
+      
+    } else {
+      alert("Usuario no registrado, por favor inicie seción.");
+      dispatch(setButtonActive());
+    }
+  };
 
   return (
     <div className="cart">
@@ -114,13 +135,20 @@ export default function Cart() {
             Vaciar el carrito
           </button>
           <div>
-            <button onClick={handleBuy} className="btn-cart green">Pagar</button>
-              {
-                preferenceId && (<Wallet initialization={{
+            <button onClick={handleAccess} className="btn-cart green">
+              Realizar pedido
+            </button>
+            <button onClick={handleBuy} className="btn-cart green">
+              Pagar
+            </button>
+            {preferenceId && (
+              <Wallet
+                initialization={{
                   preferenceId: preferenceId,
-                  redirectMode: 'blank'
-                }}/>)
-              }
+                  redirectMode: "blank",
+                }}
+              />
+            )}
           </div>
         </div>
       )}

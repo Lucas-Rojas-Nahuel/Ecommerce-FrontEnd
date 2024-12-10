@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import useUserRole from "./hooks/users/useUserRole.js"; 
-import { useState } from "react";
+import { useEffect } from "react";
 
 //Paginas públicas
 import Home from "./pages/home";
@@ -36,21 +36,30 @@ import CreateUser from "./components/body/adminPanel/ManageUsers/CreateUser.jsx"
 import EditUser from "./components/body/adminPanel/ManageUsers/EditUser.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProductInfo from "./components/body/products/productInformation/ProductInfo.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Footer from "./pages/footer.jsx";
 import Cart from "./components/body/Cart/Cart.jsx";
+import ProductOrders from "./components/body/userViews/productOrders/ProductOrders.jsx";
+import { fetchUserProfile } from "./slices/authSlice.js";
 
 function App() {
   //funcion para que se muestre el login y el register
   const isActive = useSelector((state) => state.btnModal.isActive);
 
-  //estado para ver el rol del usuario solo duevuelve true o false
+  //slice para ver si esta autentificado el usuario
+ const dispatch = useDispatch()
 
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    !!localStorage.getItem("token")
+  const { isAuthenticated } = useSelector(
+    (state) => state.auth
   );
 
- 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      dispatch(fetchUserProfile());
+    }
+  }, [dispatch, isAuthenticated]);
+
+
 
   //verificamos el rol
   const { role } = useUserRole(); 
@@ -58,8 +67,8 @@ function App() {
 
   return (
     <AuthProvider>
-      {isActive && <Registry setIsAuthenticated={setIsAuthenticated} />}
-      <Header setIsAuthenticated={setIsAuthenticated} />
+      {isActive && <Registry />}
+      <Header  />
       <Routes>
         {isAuthenticated ? (
           <>
@@ -69,12 +78,12 @@ function App() {
                 <Route
                   path="/userView"
                   element={
-                    <UserViews setIsAuthenticated={setIsAuthenticated} />
+                    <UserViews  />
                   }
                 />
                 <Route
                   path="/profile"
-                  element={<Profile setIsAuthenticated={setIsAuthenticated} />}
+                  element={<Profile  />}
                 />
                 <Route path="/home" element={<Home />} />
                 <Route path="/products" element={<Products />} />
@@ -82,6 +91,7 @@ function App() {
                 <Route path="/sell" element={<Sell />} />
                 <Route path="/wishList" element={<WishList />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/product-orders" element={<ProductOrders />} />
               </>
             )}
 
@@ -91,12 +101,12 @@ function App() {
                 <Route
                   path="/adminView"
                   element={
-                    <AdminPanel setIsAuthenticated={setIsAuthenticated} />
+                    <AdminPanel  />
                   }
                 />
                 <Route
                   path="/profile"
-                  element={<Profile setIsAuthenticated={setIsAuthenticated} />}
+                  element={<Profile  />}
                 />
                 <Route path="/controlPanel" element={<ControlPanel />} />
                 <Route path="/manageProducts" element={<ManageProducts />} />

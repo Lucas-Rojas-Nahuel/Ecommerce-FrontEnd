@@ -28,19 +28,15 @@ export default function SectionOptions() {
     }
   };
 
-  const handleRemove = () => {
-    
-  }
+  const handleRemove = () => {};
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(!mar.length){
-      dispatch(loadMarcas(marca))
+    if (!mar.length) {
+      dispatch(loadMarcas(marca));
     }
-     
+
     dispatch(filterByCategory({ mar, cate }));
-    
   };
 
   const categories = Array.from(
@@ -59,85 +55,85 @@ export default function SectionOptions() {
     new Set(allProducts.map((product) => product.marca))
   );
 
- 
-
   const handleSort = (e) => {
     dispatch(sortProducts(e.target.value));
   };
 
   return (
     <section className="section-options">
-      <h4>Ordenamiento</h4>
-      <select onChange={handleSort}>
-        <option value="asc">Menor a Mayor</option>
-        <option value="desc">Mayor a Menor</option>
-      </select>
+      <div className="div-options">
+        <h4>Ordenamiento</h4>
+        <select onChange={handleSort}>
+          <option value="asc">Menor a Mayor</option>
+          <option value="desc">Mayor a Menor</option>
+        </select>
 
-      <h3>Categorias</h3>
-      {/* tengo que modificar el componente CategoryOption  */}
+        <h3>Categorias</h3>
+        {/* tengo que modificar el componente CategoryOption  */}
 
-      <form onSubmit={handleSubmit}>
-        <ul>
-          <li>Categoria</li>
+        <form onSubmit={handleSubmit}>
+          <ul>
+            <li>Categoria</li>
 
-          {categories.map((categoriaUnica, index) => (
-            <li key={index}>
-              <input
-                type="checkbox"
-                name="categoria"
-                value={categoriaUnica}
-                onChange={handleChange}
-              />
-              {categoriaUnica}
-            </li>
-          ))}
-        </ul>
-        <ul>
-          {cate.length ? (
-            <>
-              <li>Marca</li>
-              {cate.length
-                ? cate.map((catego) => (
-                    <React.Fragment key={cate}>
-                      <li>{catego}</li>
-                      {productsFilteredByCategory.map((marcaUnica, index) => (
-                        <>
-                          {catego === marcaUnica.categoria ? (
-                            <li key={index}>
-                              <input
-                                type="checkbox"
-                                name="marca"
-                                value={marcaUnica.marca}
-                                onChange={handleChange}
-                              />
-                              {marcaUnica.marca}
-                            </li>
-                          ) : (
-                            ""
-                          )}
-                        </>
-                      ))}
-                    </React.Fragment>
-                  ))
-                : marca.map((marcaUnica, index) => (
-                    <li key={index}>
-                      <input
-                        type="checkbox"
-                        name="marca"
-                        value={marcaUnica}
-                        onChange={handleChange}
-                      />
-                      {marcaUnica}
-                    </li>
-                  ))}
-            </>
-          ) : (
-            ""
-          )}
-        </ul>
-        <button type="submit">Filtrar</button>
-        <button type="button">Quitar Filtro</button>
-      </form>
+            {categories.map((categoriaUnica, index) => (
+              <li key={index}>
+                <input
+                  type="checkbox"
+                  name="categoria"
+                  value={categoriaUnica}
+                  onChange={handleChange}
+                />
+                {categoriaUnica}
+              </li>
+            ))}
+          </ul>
+          <ul>
+            {cate.length ? (
+              <>
+                <li>Marca</li>
+                {cate.length
+                  ? cate.map((catego) => (
+                      <React.Fragment key={cate}>
+                        <li>{catego}</li>
+                        {productsFilteredByCategory.map((marcaUnica, index) => (
+                          <>
+                            {catego === marcaUnica.categoria ? (
+                              <li key={index}>
+                                <input
+                                  type="checkbox"
+                                  name="marca"
+                                  value={marcaUnica.marca}
+                                  onChange={handleChange}
+                                />
+                                {marcaUnica.marca}
+                              </li>
+                            ) : (
+                              ""
+                            )}
+                          </>
+                        ))}
+                      </React.Fragment>
+                    ))
+                  : marca.map((marcaUnica, index) => (
+                      <li key={index}>
+                        <input
+                          type="checkbox"
+                          name="marca"
+                          value={marcaUnica}
+                          onChange={handleChange}
+                        />
+                        {marcaUnica}
+                      </li>
+                    ))}
+              </>
+            ) : (
+              ""
+            )}
+          </ul>
+          <button type="submit">Filtrar</button>
+          <button type="button">Quitar Filtro</button>
+        </form>
+      </div>
     </section>
   );
 }

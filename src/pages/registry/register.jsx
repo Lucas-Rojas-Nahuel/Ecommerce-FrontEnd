@@ -7,7 +7,7 @@ import {
   setButtonInactive,
   setRegistryActive,
 } from "../../features/button/buttonModal";
-
+ 
 export default function Register() {
   const dispatch = useDispatch();
 
@@ -58,7 +58,7 @@ export default function Register() {
       <div className="content-btn-close">
         <button
           className="btn-close"
-          type="button"
+          type="button" 
           onClick={() => dispatch(setButtonInactive())}
         >
           <i className="fi fi-br-cross"></i>

@@ -6,7 +6,7 @@ const productSlice = createSlice({
     allProducts: [],
     productsCopy: [],
     productFilter: [],
-    marca: [],
+    marca: [], 
     categoria: [],
     text: "",
   },
@@ -57,6 +57,10 @@ const productSlice = createSlice({
     setTextFilter: (state, action) => {
       state.text = action.payload;
     },
+      
+    filterByText: (state, action) => {
+      state.productsCopy = action.payload ? action.payload : state.allProducts
+    },
   },
 });
 
@@ -69,5 +73,6 @@ export const {
   removeFilter,
   loadMarcas,
   setTextFilter,
+  filterByText,
 } = productSlice.actions;
 export default productSlice.reducer;

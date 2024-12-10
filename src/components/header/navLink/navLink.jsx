@@ -90,7 +90,7 @@ export default function NavLinkk() {
         <button className="btn-menu">
           <span>Categorias</span>
         </button>
-        <ul className="menu-content">
+        <ul className="menu-content"> 
           <CategoryOption />
           <CategoryOption />
           <CategoryOption />

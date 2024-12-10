@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Recuperar el carrito del  Local Storage al iniciar la aplicación
+const initialState = JSON.parse(localStorage.getItem('cart')) || [];
+
 const cartSlice = createSlice({
     name: 'cart',
-    initialState: [] , 
+    initialState, 
     reducers: {
         addCart: (state, action)=>{
             const product = action.payload

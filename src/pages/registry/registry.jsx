@@ -4,7 +4,7 @@ import Login from "./login";
 import './registry.css'
 import { useSelector } from "react-redux";
 
-export default function Registry({setIsAuthenticated, }) {
+export default function Registry() {
   
   const isRegisterView = useSelector((state) => state.btnModal.isRegisterView)
   
@@ -16,9 +16,9 @@ export default function Registry({setIsAuthenticated, }) {
     }}>
       <div className="model-content">
         {isRegisterView ? (
-            <Login  setIsAuthenticated={setIsAuthenticated} />
+            <Login   />
         ) : (
-            <Register  setIsAuthenticated={setIsAuthenticated} />
+            <Register />
         )}
       </div>
     </div>

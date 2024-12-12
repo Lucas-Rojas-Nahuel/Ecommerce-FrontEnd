@@ -14,14 +14,13 @@ export default function Login() {
   
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
-
+  
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(
-        "http://localhost:3001/api/v1/usuarios/login",
+      const response = await axios.post(import.meta.env.VITE_REACT_APP_ROUTE_LOGIN,
         form
       );
       console.log(response)

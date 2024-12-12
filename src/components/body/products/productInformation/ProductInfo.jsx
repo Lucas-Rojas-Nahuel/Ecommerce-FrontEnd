@@ -6,7 +6,7 @@ import useProductCrud from "../../../../hooks/products/useProductCrud";
 export default function ProductInfo() {
   const { id } = useParams(); //obtenemos el id desde la URL
   const { products, loading, error,  } = useProductCrud(
-    "http://localhost:3001/api/v1/productos"
+    import.meta.env.VITE_REACT_APP_ROUTE_PRODUCTS
   );
 
   //busca el producto en la lista de productos

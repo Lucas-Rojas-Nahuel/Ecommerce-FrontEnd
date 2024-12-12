@@ -4,7 +4,7 @@ import "./ManageUsers.css";
 
 export default function ManageUsers() {
   const { users, loading, error, deleteUser } = useUserCrud(
-    "http://localhost:3001/api/v1/usuarios"
+    import.meta.env.VITE_REACT_APP_ROUTE_USUARIOS
   );
 
   const navigate = useNavigate();

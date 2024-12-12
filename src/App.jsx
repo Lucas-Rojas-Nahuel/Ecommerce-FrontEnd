@@ -41,6 +41,7 @@ import Footer from "./pages/footer.jsx";
 import Cart from "./components/body/Cart/Cart.jsx";
 import ProductOrders from "./components/body/userViews/productOrders/ProductOrders.jsx";
 import { fetchUserProfile } from "./slices/authSlice.js";
+import SuccessPage from "./pages/Notifications/SuccessPage.jsx";
 
 function App() {
   //funcion para que se muestre el login y el register
@@ -64,7 +65,8 @@ function App() {
   //verificamos el rol
   const { role } = useUserRole(); 
   
-
+  /* console.log(import.meta.env.VITE_REACT_APP_KEY_MERCADO_PAGO)
+ */
   return (
     <AuthProvider>
       {isActive && <Registry />}
@@ -92,6 +94,7 @@ function App() {
                 <Route path="/wishList" element={<WishList />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/product-orders" element={<ProductOrders />} />
+                <Route path='/success' element={<SuccessPage />}/>
               </>
             )}
 

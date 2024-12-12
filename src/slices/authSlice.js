@@ -20,7 +20,7 @@ export const fetchUserProfile = createAsyncThunk(
 
       const userId = decodedToken.usuarioId;
       const response = await axios.get(
-        `http://localhost:3001/api/v1/usuarios/${userId}`,
+        `${import.meta.env.VITE_REACT_APP_ROUTE_USUARIOS}/${userId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

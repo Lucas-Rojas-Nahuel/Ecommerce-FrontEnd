@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+ 
 import Register from "./register";
 import Login from "./login";
 import './registry.css'
@@ -25,7 +25,4 @@ export default function Registry() {
   );
 }
 
-Registry.propTypes = {
-    setIsAuthenticated: PropTypes.func.isRequired,
-    
-}
+ 

@@ -5,31 +5,31 @@ import axios from "axios";
 
 //Acción para obtener todas las órdenes
 export const fetchOrders = createAsyncThunk('orders/fetchOrders', async ()=> {
-    const response = await axios.get('http://localhost:3001/api/v1/orden');
+    const response = await axios.get(import.meta.env.VITE_REACT_APP_ROUTE_ORDEN);
     return response.data;
 });
 
 //Acción para obtener detalles de una orden
 export const fetchOrderDetails = createAsyncThunk('orders/fetchOrderDetails', async (orderId)=> {
-    const response = await axios.get(`http://localhost:3001/api/v1/orden/${orderId}`);
+    const response = await axios.get(`${import.meta.env.VITE_REACT_APP_ROUTE_ORDEN}/${orderId}`);
     return response.data;
 });
 
 //Acción para crear una nueva orden
 export const createOrder = createAsyncThunk('orders/createOrder', async (orderData)=> {
-    const response = await axios.post(`http://localhost:3001/api/v1/orden`,orderData);
+    const response = await axios.post(`${import.meta.env.VITE_REACT_APP_ROUTE_ORDEN}`,orderData);
     return response.data;
 });
 
 //Acción para actualizar una orden existente
 export const updateOrder = createAsyncThunk('orders/updateOrder', async ({orderId ,updatedData})=> {
-    const response = await axios.put(`http://localhost:3001/api/v1/orden/${orderId}`, updatedData);
+    const response = await axios.put(`${import.meta.env.VITE_REACT_APP_ROUTE_ORDEN}/${orderId}`, updatedData);
     return response.data;
 });
 
 //Acción para eliminar una orden  
 export const deleteOrder = createAsyncThunk('orders/deleteOrder', async (orderId)=> {
-    const response = await axios.delete(`http://localhost:3001/api/v1/orden/${orderId}`);
+    const response = await axios.delete(`${import.meta.env.VITE_REACT_APP_ROUTE_ORDEN}/${orderId}`);
     return response.data;
 });
 

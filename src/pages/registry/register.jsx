@@ -28,8 +28,7 @@ export default function Register() {
       [e.target.name]: e.target.value,
     });
 
-  console.log(form);
-  console.log(passwordRepeat);
+   
 
   const handleRegister = async () => {
     setError("");
@@ -40,8 +39,7 @@ export default function Register() {
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:3001/api/v1/usuarios",
+      const response = await axios.post(import.meta.env.VITE_REACT_APP_ROUTE_REGISTER,
         form
       );
       console.log(response);

@@ -21,12 +21,12 @@ export default function SectionProducts({ filters }) {
   const dispatch = useDispatch();
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/v1/productos")
+      .get(import.meta.env.VITE_REACT_APP_ROUTE_PRODUCTS)
       .then((res) => dispatch(setAllProducts(res.data)))
       .catch((err) => console.error(err));
   }, [dispatch]);
 
-  
+ 
 
   return (
     <section className="section-products">

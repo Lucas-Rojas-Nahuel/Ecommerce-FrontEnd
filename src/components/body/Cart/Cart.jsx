@@ -22,10 +22,6 @@ export default function Cart() {
     (state) => state.auth
   );
 
-   
-
-  
-
   const navigate = useNavigate();
 
   const [preferenceId, setPreferenceId] = useState(null);
@@ -36,8 +32,6 @@ export default function Cart() {
         "http://localhost:3001/api/v1/create_preference",
         cart
       );
-      console.log(response.data);
-
       const { id } = response.data;
       return id;
     } catch (error) {

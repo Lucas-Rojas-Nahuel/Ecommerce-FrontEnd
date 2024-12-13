@@ -16,7 +16,7 @@ export default function ProductOrders() {
 
   const [preferenceId, setPreferenceId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
+  console.log(profile)
   const createPreference = async () => {
     try {
       const response = await axios.post(

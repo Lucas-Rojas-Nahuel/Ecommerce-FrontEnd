@@ -7,6 +7,7 @@ export const fetchUserProfile = createAsyncThunk(
   "auth/fetchUserProfile",
   async (_, { rejectWithValue }) => {
     const token = localStorage.getItem("token");
+    console.log(token)
     if (!token) {
       return rejectWithValue("Token no encontrado");
     }

@@ -45,7 +45,7 @@ import Footer from "./pages/footer.jsx";
 //pagina no autorizada
 import Unauthorized from "./pages/Unauthorized.jsx";
 
-
+console.log(localStorage.getItem("token"))
 
 
 function App() {

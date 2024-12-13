@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useUserCrud from "../../hooks/users/useUserCrud";
-import "./ManageUsers.css";
+import "./ManageProducts.css";
 
 export default function ManageUsers() {
   const { users, loading, error, deleteUser } = useUserCrud(
@@ -26,8 +26,14 @@ export default function ManageUsers() {
       <h3>Administrar Usuarios</h3>
       <div>
         <h1>usuarios</h1>
-        <button onClick={() => navigate("/create-user")}>Crear Usuario</button>
-        <table>
+        <button
+          className="table-btn"
+          style={{ marginBottom: "10px", backgroundColor: "#00b894" }}
+          onClick={() => navigate("/create-user")}
+        >
+          Crear Usuario
+        </button>
+        <table className="table">
           <thead>
             <tr>
               <th>Íncice</th>
@@ -49,10 +55,16 @@ export default function ManageUsers() {
                 <td>{user.email}</td>
                 <td>{user.esAdmin}</td>
                 <td>
-                  <button onClick={() => handleEditUser(user._id)}>
+                  <button
+                    className="table-btn"
+                    onClick={() => handleEditUser(user._id)}
+                  >
                     Editar
                   </button>
-                  <button onClick={() => handleDeleteUser(user._id)}>
+                  <button
+                    className="table-btn"
+                    onClick={() => handleDeleteUser(user._id)}
+                  >
                     Eliminar
                   </button>
                 </td>

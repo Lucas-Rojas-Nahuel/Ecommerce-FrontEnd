@@ -1,19 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import useProductCrud from "../../hooks/products/useProductCrud";
 import "./ManageProducts.css";
+import { useState } from "react";
  
 export default function ManageProducts() {
   const { products, loading, error, deleteProduct } = useProductCrud(
     import.meta.env.VITE_REACT_APP_ROUTE_PRODUCTS
   );
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const navigate = useNavigate();
 
   const handleDeleteProduct = (id) => {
     const confirmDelete = window.confirm("¿Seguro que desea eliminar el producto?");
     if (confirmDelete){
+      console.log(id)
       deleteProduct(id);
-      window.location.reload();}
+      setShowSuccessMessage(true);
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+        window.location.reload();
+      }, 3000);
+      }
   };
 
   const handleEditProduct = (id) => {
@@ -25,6 +33,11 @@ export default function ManageProducts() {
 
   return (
     <section className="section-manageProduct">
+      {/* Mensaje flotante */}
+      {showSuccessMessage && (
+        <div className="toast success-toast">Producto eliminado con éxito.</div>
+      )}
+      {error && <div className="toast error-toast">{error}</div>}
       <h3>Administrar Productos</h3>
       <div>
         <h1>Productos</h1>
@@ -57,7 +70,9 @@ export default function ManageProducts() {
                 <td>{product.nombre}</td>
                 <td>{product.categoria}</td>
                 <td>{product.marca}</td>
-                <td>{product.precio}</td>
+                <td>
+                  ${new Intl.NumberFormat("es-AR").format(product.precio)}
+                </td>
                 <td>{product.stock}</td>
                 <td>{new Date(product.fechaIngreso).toLocaleDateString()}</td>
                 <td>

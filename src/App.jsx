@@ -23,6 +23,7 @@ import ManageOrders from "./pages/AdminPanel/ManageOrders.jsx";
 import ManageUsers from "./pages/AdminPanel/ManageUsers.jsx";
 import ManageDiscounts from "./pages/AdminPanel/ManageDiscounts.jsx";
 import ManageReviews from "./pages/AdminPanel/ManageReviews.jsx";
+import CreateProduct from "./components/body/adminPanel/ManageProducts/CreateProduct";
 
 //pagina para usuario y administrador
 import Profile from "./pages/Profile.jsx";
@@ -67,26 +68,19 @@ function App() {
   
   /* console.log(import.meta.env.VITE_REACT_APP_KEY_MERCADO_PAGO)
  */
+
   return (
     <AuthProvider>
       {isActive && <Registry />}
-      <Header  />
+      <Header />
       <Routes>
         {isAuthenticated ? (
           <>
             {/* Rutas para usuarios */}
             {role === "user" && (
               <>
-                <Route
-                  path="/userView"
-                  element={
-                    <UserViews  />
-                  }
-                />
-                <Route
-                  path="/profile"
-                  element={<Profile  />}
-                />
+                <Route path="/userView" element={<UserViews />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/offer" element={<Offer />} />
@@ -94,25 +88,18 @@ function App() {
                 <Route path="/wishList" element={<WishList />} />
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/product-orders" element={<ProductOrders />} />
-                <Route path='/success' element={<SuccessPage />}/>
+                <Route path="/success" element={<SuccessPage />} />
               </>
             )}
 
             {/* Rutas para administradores */}
             {role === "admin" && (
               <>
-                <Route
-                  path="/adminView"
-                  element={
-                    <AdminPanel  />
-                  }
-                />
-                <Route
-                  path="/profile"
-                  element={<Profile  />}
-                />
+                <Route path="/adminView" element={<AdminPanel />} />
+                <Route path="/profile" element={<Profile />} />
                 <Route path="/controlPanel" element={<ControlPanel />} />
                 <Route path="/manageProducts" element={<ManageProducts />} />
+                <Route path="/create-product" element={<CreateProduct />} />
                 <Route path="/manageOrders" element={<ManageOrders />} />
                 <Route path="/manageUsers" element={<ManageUsers />} />
                 <Route path="/manageDiscounts" element={<ManageDiscounts />} />
@@ -139,7 +126,7 @@ function App() {
           </>
         )}
       </Routes>
-      <Footer/>
+      <Footer />
     </AuthProvider>
   );
 }

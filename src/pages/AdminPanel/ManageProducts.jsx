@@ -10,8 +10,10 @@ export default function ManageProducts() {
   const navigate = useNavigate();
 
   const handleDeleteProduct = (id) => {
-    deleteProduct(id);
-    window.location.reload();
+    const confirmDelete = window.confirm("¿Seguro que desea eliminar el producto?");
+    if (confirmDelete){
+      deleteProduct(id);
+      window.location.reload();}
   };
 
   const handleEditProduct = (id) => {

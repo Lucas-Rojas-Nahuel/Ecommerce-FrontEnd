@@ -24,6 +24,7 @@ import ManageUsers from "./pages/AdminPanel/ManageUsers.jsx";
 import ManageDiscounts from "./pages/AdminPanel/ManageDiscounts.jsx";
 import ManageReviews from "./pages/AdminPanel/ManageReviews.jsx";
 import CreateProduct from "./components/body/adminPanel/ManageProducts/CreateProduct";
+import EditProduct from "./components/body/adminPanel/ManageProducts/EditProduct.jsx";
 
 //pagina para usuario y administrador
 import Profile from "./pages/Profile.jsx";
@@ -100,6 +101,7 @@ function App() {
                 <Route path="/controlPanel" element={<ControlPanel />} />
                 <Route path="/manageProducts" element={<ManageProducts />} />
                 <Route path="/create-product" element={<CreateProduct />} />
+                <Route path="/edit-product/:id" element={<EditProduct />} />
                 <Route path="/manageOrders" element={<ManageOrders />} />
                 <Route path="/manageUsers" element={<ManageUsers />} />
                 <Route path="/manageDiscounts" element={<ManageDiscounts />} />

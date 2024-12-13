@@ -30,6 +30,12 @@ form textarea {
   color: #ffffff;
 }
 
+form textarea {
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+  height: 65px; /* Ajusta la altura del textarea */
+  resize: vertical; /* Permite redimensionar solo verticalmente */
+}
+
 form input[type="file"] {
   padding: 5px;
 }

@@ -44,7 +44,7 @@ export default function Login() {
       }
     }
     
-       window.location.reload()  
+       /* window.location.reload()   */
   }; 
 
   return (

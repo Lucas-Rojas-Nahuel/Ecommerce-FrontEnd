@@ -1,17 +1,13 @@
-/* eslint-disable no-unused-vars */
-
 import "./sectionOptions.css";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addFilter,
-  filterByCategory,
-  loadMarcas,
   removeFilter,
+  filterByCategory,
   sortProducts,
-  updateProductsCopy,
+  clearFilters,
 } from "../../../../slices/productsSlice";
-import React from "react";
 
 export default function SectionOptions() {
   const allProducts = useSelector((state) => state.products.allProducts);
@@ -19,6 +15,10 @@ export default function SectionOptions() {
   const cate = useSelector((state) => state.products.categoria);
   const dispatch = useDispatch();
 
+  const activeCategorias = cate;
+  const activeMarcas = mar;
+
+  // Maneja el cambio en los checkboxes de categoría y marca
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
     if (checked) {
@@ -28,36 +28,35 @@ export default function SectionOptions() {
     }
   };
 
-  const handleRemove = () => {};
-
+  // Aplica los filtros seleccionados
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!mar.length) {
-      dispatch(loadMarcas(marca));
-    }
-
-    dispatch(filterByCategory({ mar, cate }));
+    dispatch(filterByCategory({ mar: activeMarcas, cate: activeCategorias }));
   };
 
-  const categories = Array.from(
-    new Set(allProducts.map((product) => product.categoria))
-  );
+  // Quita todos los filtros
+  const handleClearFilters = () => {
+    dispatch(clearFilters()); // Limpia filtros
+  };
 
-  const productsFilteredByCategory = allProducts.filter((producto) =>
-    cate.includes(producto.categoria)
-  );
-
-  const brandFilteredProducts = allProducts.filter((product) =>
-    mar.includes(product.marca)
-  );
-
-  const marca = Array.from(
-    new Set(allProducts.map((product) => product.marca))
-  );
-
+  // Ordena los productos
   const handleSort = (e) => {
     dispatch(sortProducts(e.target.value));
   };
+
+  // Obtén categorías y marcas únicas
+  const categories = Array.from(new Set(allProducts.map((p) => p.categoria)));
+  const filteredBrands = Array.from(
+    new Set(
+      allProducts
+        .filter((product) =>
+          activeCategorias.length
+            ? activeCategorias.includes(product.categoria)
+            : true
+        )
+        .map((product) => product.marca)
+    )
+  );
 
   return (
     <section className="section-options">
@@ -68,70 +67,52 @@ export default function SectionOptions() {
           <option value="desc">Mayor a Menor</option>
         </select>
 
-        <h3>Categorias</h3>
-        {/* tengo que modificar el componente CategoryOption  */}
-
+        <h3>Filtros</h3>
         <form onSubmit={handleSubmit}>
           <ul>
-            <li>Categoria</li>
-
-            {categories.map((categoriaUnica, index) => (
+            <li>Categorías</li>
+            {categories.map((categoria, index) => (
               <li key={index}>
                 <input
                   type="checkbox"
                   name="categoria"
-                  value={categoriaUnica}
+                  value={categoria}
                   onChange={handleChange}
+                  checked={activeCategorias.includes(categoria)}
                 />
-                {categoriaUnica}
+                {categoria}
               </li>
             ))}
           </ul>
-          <ul>
-            {cate.length ? (
-              <>
-                <li>Marca</li>
-                {cate.length
-                  ? cate.map((catego) => (
-                      <React.Fragment key={cate}>
-                        <li>{catego}</li>
-                        {productsFilteredByCategory.map((marcaUnica, index) => (
-                          <>
-                            {catego === marcaUnica.categoria ? (
-                              <li key={index}>
-                                <input
-                                  type="checkbox"
-                                  name="marca"
-                                  value={marcaUnica.marca}
-                                  onChange={handleChange}
-                                />
-                                {marcaUnica.marca}
-                              </li>
-                            ) : (
-                              ""
-                            )}
-                          </>
-                        ))}
-                      </React.Fragment>
-                    ))
-                  : marca.map((marcaUnica, index) => (
-                      <li key={index}>
-                        <input
-                          type="checkbox"
-                          name="marca"
-                          value={marcaUnica}
-                          onChange={handleChange}
-                        />
-                        {marcaUnica}
-                      </li>
-                    ))}
-              </>
-            ) : (
-              ""
-            )}
-          </ul>
-          <button type="submit">Filtrar</button>
-          <button type="button">Quitar Filtro</button>
+
+          {activeCategorias.length > 0 && (
+            <ul>
+              <li>Marcas</li>
+              {filteredBrands.map((marca, index) => (
+                <li key={index}>
+                  <input
+                    type="checkbox"
+                    name="marca"
+                    value={marca}
+                    onChange={handleChange}
+                    checked={activeMarcas.includes(marca)}
+                  />
+                  {marca}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <button className="button-filter" type="submit">
+            Filtrar
+          </button>
+          <button
+            className="button-filter"
+            type="button"
+            onClick={handleClearFilters}
+          >
+            Quitar Filtros
+          </button>
         </form>
       </div>
     </section>

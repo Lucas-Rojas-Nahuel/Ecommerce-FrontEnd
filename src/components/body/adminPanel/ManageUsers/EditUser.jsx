@@ -3,14 +3,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import useUserCrud from "../../../../hooks/users/useUserCrud";
 
 export default function EditUser() {
-  const { users, updateUser } = useUserCrud(import.meta.env.VITE_REACT_APP_ROUTE_USUARIOS);
+  const { users, updateUser } = useUserCrud(
+    import.meta.env.VITE_REACT_APP_ROUTE_USUARIOS
+  );
   const { id } = useParams();
   const [formData, setFormData] = useState({
     nombre: "",
     username: "",
     email: "",
-    password: "",
-    esAdmin: "user",
+    //password: "",
+    //esAdmin: "user",
   });
   const navigate = useNavigate();
 
@@ -31,7 +33,7 @@ export default function EditUser() {
     e.preventDefault();
     updateUser(formData._id, formData);
     navigate("/manageUsers");
-    window.location.reload() 
+    window.location.reload();
   };
   return (
     <section style={{ marginTop: "100px" }}>
@@ -66,7 +68,7 @@ export default function EditUser() {
             required
           />
         </div>
-        <div>
+        {/* <div>
           <label>Contraseña:</label>
           <input
             type="password"
@@ -75,7 +77,7 @@ export default function EditUser() {
             onChange={handleChange}
             required
           />
-        </div>
+        </div> */}
         <div>
           <label>Rol: </label>
           <select

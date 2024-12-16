@@ -95,3 +95,30 @@
     transform: translateY(-10px);
   }
 }
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.pagination-btn {
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: #ffffffb7;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 3px;
+}
+
+.pagination-btn.active {
+  background-color: #00b894;
+  color: rgba(255, 255, 255, 0.808);
+  font-weight: bold;
+}
+
+.pagination-btn:disabled {
+  background-color: #f0f0f0f3;
+  cursor: not-allowed;
+}

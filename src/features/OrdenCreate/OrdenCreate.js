@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
     ordenCreate: false,
+    activePage: JSON.parse(localStorage.getItem('activePage')) || false,
 }
 
 const isOrdenCreate = createSlice({
@@ -18,8 +19,16 @@ const isOrdenCreate = createSlice({
         setOrdenInative: (state) => {
             state.ordenCreate = false;
         },
+        setPageActive:(state) => {
+            state.activePage = true
+            localStorage.setItem('activePage', true)
+        },
+        setPageInative: (state) => {
+            state.activePage = false;
+            localStorage.setItem('activePage', false)
+        },
     }
 })
 
-export const {toggleOrden, setOrdenActive, setOrdenInative}= isOrdenCreate.actions;
+export const {toggleOrden, setOrdenActive, setOrdenInative, setPageActive, setPageInative}= isOrdenCreate.actions;
 export default isOrdenCreate.reducer;

@@ -1,6 +1,10 @@
+
+
  
 
 export default function PendingPage() {
+  
+
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Tu pago está en proceso</h1>

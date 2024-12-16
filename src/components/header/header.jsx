@@ -13,7 +13,7 @@ import NavLinkk from "./navLink/navLink";
 
 export function Header( ) {
   //funcion para que al precionar el input del buscador cambie de color
-  const [isActive, setIsAtive] = useState(false);
+  const [isActive, setIsAtive] = useState(true);
   const handlerFocus = () => {
     setIsAtive(true);
   };
@@ -40,8 +40,7 @@ export function Header( ) {
   };
 
   return (
-    <section className="section-header1">
-      <div className="section-div">
+    
         <div className="header">
           <SectionHeader
             onClick1={handlerClickMenu}
@@ -73,8 +72,7 @@ export function Header( ) {
             />
           )}
         </div>
-      </div>
-    </section>
+      
   );
 }
 

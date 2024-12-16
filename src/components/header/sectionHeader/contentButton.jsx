@@ -22,10 +22,10 @@ export function ContentButton({
     (state) => state.auth
   );
    
-  const [isOpen, setIsOpen] = useState(false);
-
+  
   const navigate = useNavigate();
-
+  
+  const [isOpen, setIsOpen] = useState(false);
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -40,6 +40,7 @@ export function ContentButton({
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0)
   
+  
 
 
   return (
@@ -53,7 +54,7 @@ export function ContentButton({
       </button>
       <div className="dropdown-menu">
         {profile ? (
-          <button onClick={toggleDropdown} className="btn-users dropdown-button">
+          <button onClick={toggleDropdown} className='btn-users dropdown-button' >
             <i className="fi fi-sr-user"></i>
             {role ? <p>{profile.nombre}</p> : <p>Ingresar</p>}
           </button>
@@ -83,7 +84,7 @@ export function ContentButton({
       </div>
 
       {role != "admin" ? (
-        <NavLink to={'/cart'} className="shopping">
+        <NavLink to={'/cart'} className='shopping'>
           <i className="fi fi-ss-shopping-cart"></i>
           {cartItemCount > 0 && <span className="span-count">{cartItemCount}</span>}
         </NavLink>

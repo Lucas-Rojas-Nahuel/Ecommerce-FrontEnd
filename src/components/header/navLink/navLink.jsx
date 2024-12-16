@@ -4,6 +4,7 @@ import CategoryOption from "../menuContent/categoryOption";
 import "./navLink.css";
 import { NavLink } from "react-router-dom";
 
+
 export default function NavLinkk() {
   const { role } = useUserRole();
   
@@ -19,24 +20,27 @@ export default function NavLinkk() {
     }
   }, [role])
 
+
+ 
+
   const renderContent = () => {
     if (role === "user") {
       return (
         <>
           <li className="nav-list">
-            <NavLink to="/home">Inicio</NavLink>
+            <NavLink to="/home" >Inicio</NavLink>
           </li>
           <li className="nav-list">
-            <NavLink to="/products">Productos</NavLink>
+            <NavLink to="/products" >Productos</NavLink>
           </li>
           <li className="nav-list">
-            <NavLink to="/offer">Ofertas</NavLink>
+            <NavLink to="/offer" >Ofertas</NavLink>
           </li>
           <li className="nav-list">
-            <NavLink to="/sell">Vender</NavLink>
+            <NavLink to="/sell" >Vender</NavLink>
           </li>
           <li className="nav-list">
-            <NavLink to="/wishList">Lista de Deseos</NavLink>
+            <NavLink to="/wishList" >Lista de Deseos</NavLink>
           </li>
         </>
       );

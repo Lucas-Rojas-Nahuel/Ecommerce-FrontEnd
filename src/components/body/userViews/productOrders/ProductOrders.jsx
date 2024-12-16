@@ -1,48 +1,91 @@
+/* eslint-disable no-unused-vars */
 import "./ProductOrders.css";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import axios from "axios";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
-import { setOrdenActive } from "../../../../features/OrdenCreate/OrdenCreate";
-import { createOrder } from "../../../../slices/orderSlice";
+import { setOrdenActive, setPageInative } from "../../../../features/OrdenCreate/OrdenCreate";
+import { usePreventNavigation } from "../../../../hooks/usePreventNavigation";
+import { useLocation, useNavigate } from "react-router-dom";
+import { createOrder, deleteOrder, fetchOrders } from "../../../../slices/orderSlice";
+import useRouteState from "../../../../hooks/useRouteState";
+
 
 initMercadoPago(import.meta.env.VITE_REACT_APP_KEY_MERCADO_PAGO);
 
 export default function ProductOrders() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { profile } = useSelector((state) => state.auth);
   const cart = useSelector((state) => state.cart);
   const isOrdenCrate = useSelector((state) => state.isOrden.ordenCreate);
 
+  const [ordenCreate, setOrdenCreate] = useState(false)
+  const [ordenId, setOrdenId] = useState(null)
+
+  const orders = useSelector((state)=>state.orders.orders)
+  const status = useSelector((state)=>state.orders.status)
+
+  
+  useRouteState('/product-orders');
+  
+  useEffect(()=>{
+    if(status === 'idle'){
+      dispatch(fetchOrders())
+    }
+    if(ordenCreate && orders.length > 0){
+      const lastOrder = orders[orders.length - 1]
+      setOrdenId(lastOrder._id)
+      setOrdenCreate(false)
+    }
+      
+  }, [status, dispatch, orders, ordenCreate]);
+  
+
+  console.log(ordenId)
+
+ 
   const [preferenceId, setPreferenceId] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(profile)
+  
+ usePreventNavigation(isOrdenCrate, 'Tienes un pedido pendiente. Si abandonas la página, el pedido será cancelado.', ordenId)
+  
+
   const createPreference = async () => {
     try {
       const response = await axios.post(
-        import.meta.env.VITE_REACT_APP_ROUTE_MEACADO_PAGO,
-        cart
+        import.meta.env.VITE_REACT_APP_ROUTE_MEACADO_PAGO,{cart, ordenId}
+        
       );
       const { id } = response.data;
       return id;
     } catch (error) {
-      console.error(error);
+      console.error("Error creando preferencia: ", error);
     }
   };
 
   const handleBuy = async () => {
     setIsLoading(true);
+    dispatch(setOrdenActive(true))
     const id = await createPreference();
     setIsLoading(false);
     id && setPreferenceId(id);
   };
 
+ 
+   
   const cancelOrder = async () => {
-    dispatch(setOrdenActive(false));
-    alert('Pedido cancelado.')
-  }
+    if(ordenId){
+      alert("Pedido cancelado.");
+      
+      dispatch(deleteOrder(ordenId))
+      navigate('/cart')
+    }else{
+      alert("Pedido cancelado.");
+      navigate('/cart')
+    }
+  };
 
-  
   const productoEnOrden = cart.map((producto) => ({
     producto: producto.id,
     cantidad: producto.quantity,
@@ -60,24 +103,16 @@ export default function ProductOrders() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createOrder(formData)); 
-    dispatch(setOrdenActive());
-    handleBuy()
+     dispatch(createOrder(formData)).unwrap().then(()=>{
+      setOrdenCreate(true);
+     }).catch((error)=> {
+      console.error('Error creando la orden: ',error)
+     })   
+    dispatch(setOrdenActive(true));
+    handleBuy();
   };
 
-  useEffect(()=>{
-    const handleBeforeUnload = (event) => {
-      if (isOrdenCrate){
-        event.preventDefault();
-        event.returnValue = 'Tienes un pedido pendiente. Si abandonas la página, el pedido será cancelado.'
-      }
-    }
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [isOrdenCrate])
+  
 
   return (
     <section className="section-orders">
@@ -134,12 +169,23 @@ export default function ProductOrders() {
             />
           </div>
           <div>
-            <button disabled={isLoading} type="submit">Realizar Pedido</button>
-            <button type="button" onClick={()=>{
-              if(window.confirm('¿Estás seguro de que quieres cancelar el pedido?')){
-                cancelOrder();
-              }
-            }} >Cancelar Pedido</button>
+            <button disabled={isLoading} type="submit">
+              Realizar Pedido
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    "¿Estás seguro de que quieres cancelar el pedido?"
+                  )
+                ) {
+                  cancelOrder();
+                }
+              }}
+            >
+              Cancelar Pedido
+            </button>
           </div>
           {isLoading && <p>Generando tu pedido, por favor espera...</p>}
           {preferenceId && (

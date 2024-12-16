@@ -8,7 +8,22 @@
     box-sizing: border-box;
 }
 
+.custom-width  {
+  min-width: 100px!important; /* Ajusta según el contenido */
+}
+
+.btn-users{
+    width: 87px!important;
+}
+.shopping{
+    width: 40px!important;
+}
+
 @media (max-width: 600px ){
+    .content-searches{
+        display: none;
+    }
+
     .section-header{
         justify-content: space-between;
     }

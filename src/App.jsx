@@ -1,10 +1,11 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import useUserRole from "./hooks/users/useUserRole.js"; 
 import { useEffect } from "react";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserProfile } from "./slices/authSlice.js";
+
 
 //Paginas públicas
 import Home from "./pages/home";
@@ -44,14 +45,15 @@ import Footer from "./pages/footer.jsx";
 
 //pagina no autorizada
 import Unauthorized from "./pages/Unauthorized.jsx";
+import { setPageActive, setPageInative } from "./features/OrdenCreate/OrdenCreate.js";
 
-console.log(localStorage.getItem("token"))
+ 
 
 
 function App() {
   //funcion para que se muestre el login y el register
   const isActive = useSelector((state) => state.btnModal.isActive);
-
+  console.log(isActive)
   //slice para ver si esta autentificado el usuario
  const dispatch = useDispatch()
 
@@ -59,22 +61,37 @@ function App() {
     (state) => state.auth
   );
 
+  const location = useLocation()
+
   useEffect(() => {
     if (!isAuthenticated) {
       dispatch(fetchUserProfile());
     }
-  }, [dispatch, isAuthenticated]);
+    const activePaths = ['/product-orders', '/success','/failure','/pending']
+    if(activePaths.includes(location.pathname)){
+      dispatch(setPageActive())
+    }else{
+      dispatch(setPageInative())
+    }
+  }, [dispatch, isAuthenticated, location]);
 
-
+  
 
   //verificamos el rol
   const { role } = useUserRole(); 
   
+  const isPageActive = useSelector((state) => state.isOrden.activePage);
+ 
+
   
+  
+
+
   return (
     <AuthProvider>
       {isActive && <Registry />}
-      <Header  />
+      {!isPageActive && <Header  />}
+      
       <Routes>
         {isAuthenticated ? (
           <>
@@ -117,7 +134,7 @@ function App() {
             {/* Rutas públicas */}
             {!role && (
               <>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Navigate to='/home'/>}/>
                 <Route path="/home" element={<Home />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/products/:id" element={<ProductInfo />} />
@@ -130,7 +147,7 @@ function App() {
           </>
         )}
       </Routes>
-      <Footer/>
+      {!isPageActive && <Footer/>}
     </AuthProvider>
   );
 }

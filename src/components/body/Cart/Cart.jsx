@@ -6,13 +6,12 @@ import {
   updateQuantity,
 } from "../../../slices/cartSlice";
 import { NavLink, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useState } from "react";
-import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+
 import { setButtonActive } from "../../../features/button/buttonModal";
 
 
-initMercadoPago("APP_USR-df34c673-b2bb-4e26-8ec7-05cca3654e42");
+
+
 
 export default function Cart() {
   const cart = useSelector((state) => state.cart);
@@ -24,21 +23,7 @@ export default function Cart() {
 
   const navigate = useNavigate();
 
-  const [preferenceId, setPreferenceId] = useState(null);
-
-  const createPreference = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/api/v1/create_preference",
-        cart
-      );
-      const { id } = response.data;
-      return id;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+  
   const handleRemove = (id) => {
     dispatch(removeFromCart(id));
   };
@@ -56,10 +41,7 @@ export default function Cart() {
     dispatch(clearCart());
   };
 
-  const handleBuy = async () => {
-    const id = await createPreference();
-    id && setPreferenceId(id);
-  };
+  
 
   const handleAccess = () => {
     if (isAuthenticated) {
@@ -132,17 +114,6 @@ export default function Cart() {
             <button onClick={handleAccess} className="btn-cart green">
               Realizar pedido
             </button>
-            <button onClick={handleBuy} className="btn-cart green">
-              Pagar
-            </button>
-            {preferenceId && (
-              <Wallet
-                initialization={{
-                  preferenceId: preferenceId,
-                  redirectMode: "blank",
-                }}
-              />
-            )}
           </div>
         </div>
       )}

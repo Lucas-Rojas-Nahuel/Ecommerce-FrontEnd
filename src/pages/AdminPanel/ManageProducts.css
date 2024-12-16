@@ -1,0 +1,124 @@
+.table {
+  width: 97%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.table th,
+.table td {
+  padding: 12px 18px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #333; /* Un poco más claro que el fondo */
+  color: #fff; /* Texto blanco para contraste */
+  font-weight: bold;
+}
+
+.table td {
+  background-color: #2a2a2a; /* Gris oscuro */
+  color: #ddd; /* Gris claro para texto */
+}
+
+.table tr:nth-child(even) td {
+  background-color: #252525; /* Ligeramente más claro en filas pares */
+}
+
+.table tr:hover td {
+  background-color: #444; /* Resalta la fila al pasar el mouse */
+}
+
+.table a {
+  color: #00bcd4; /* Azul claro para enlaces */
+  text-decoration: none;
+}
+
+.table a:hover {
+  text-decoration: underline;
+}
+
+/* Opcional: estilos para un botón en la tabla */
+.table-btn {
+  background-color: #555;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  margin-left: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.table-btn:hover {
+  background-color: #666;
+}
+
+.toast {
+  position: fixed;
+  top: 30px;
+  left: 40%;
+  z-index: 1000;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease, fadeOut 3s ease 2.5s;
+}
+
+.success-toast {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.error-toast {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.pagination-btn {
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: #ffffffb7;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 3px;
+}
+
+.pagination-btn.active {
+  background-color: #00b894;
+  color: rgba(255, 255, 255, 0.808);
+  font-weight: bold;
+}
+
+.pagination-btn:disabled {
+  background-color: #f0f0f0f3;
+  cursor: not-allowed;
+}

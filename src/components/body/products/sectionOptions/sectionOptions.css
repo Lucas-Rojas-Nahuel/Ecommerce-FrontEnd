@@ -1,19 +1,81 @@
-.section-options, .padre{
-    position: relative;
-    height: 100%;
-    width: 280px;
-    overflow: hidden;
-     
+.section-options,
+.padre {
+  position: relative;
+  height: 100%;
+  width: 280px;
+  overflow: hidden;
+  background-color: #2d3436;
+  color: #fff;
 }
-    
-.div-options, .hijo{
-    position: absolute;
-    top: 10;
-    left: 10;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-     
+
+.div-options,
+.hijo {
+  position: absolute;
+  top: 10;
+  left: 10;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+h4,
+h3 {
+  text-transform: uppercase; /* Mayúsculas */
+  font-size: 16px;
+  font-weight: bold;
+}
+.button-filter {
+  background-color: #00918e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  margin-top: 10px;
+  margin-right: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.button-filter:hover {
+  background-color: #55efc4;
+}
+
+/* Estilo para las opciones */
+ul {
+  list-style: none; /* Elimina los puntos por defecto */
+  padding-left: 0; /* Elimina el padding de la lista */
+}
+
+li {
+  margin-bottom: 5px; /* Espaciado entre las opciones */
+  text-transform: capitalize;
+}
+
+/* Estilo para el select */
+select {
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px 12px;
+  font-size: 14px; /* Tamaño de fuente */
+  font-family: Arial, sans-serif; /* Fuente */
+  width: 100%; /* Ancho completo */
+  cursor: pointer; /* Cambia el cursor cuando está sobre el select */
+  transition: all 0.3s ease-in-out; /* Animación de transición */
+}
+
+/* Estilo para las opciones dentro del select */
+select option {
+  background-color: #2d3436; /* Fondo para las opciones */
+  color: white; /* Texto blanco */
+  padding: 10px; /* Espaciado de las opciones */
+}
+
+/* Cambio de color cuando pasas el mouse sobre el select */
+select:hover {
+  border-color: #55efc4; /* Cambiar borde al pasar el mouse */
+  background-color: #333; /* Fondo un poco más oscuro */
 }

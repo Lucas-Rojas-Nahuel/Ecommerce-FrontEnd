@@ -3,22 +3,18 @@ import { createSlice } from "@reduxjs/toolkit";
 const productSlice = createSlice({
   name: "products",
   initialState: {
-    allProducts: [],
-    productsCopy: [],
-    productFilter: [],
-    marca: [], 
-    categoria: [],
-    text: "",
+    allProducts: [], // Todos los productos originales
+    productsCopy: [], // Productos filtrados o ordenados
+    marca: [], // Filtros seleccionados para marcas
+    categoria: [], // Filtros seleccionados para categorías
+    text: "", // Filtro por texto (búsqueda)
   },
   reducers: {
     setAllProducts: (state, action) => {
       state.allProducts = action.payload;
-      state.productsCopy = action.payload;
-      state.productFilter = action.payload;
+      state.productsCopy = action.payload; // Inicialmente, todos los productos están en la copia
     },
-    updateProductsCopy: (state, action) => {
-      state.productsCopy = action.payload;
-    },
+
     sortProducts: (state, action) => {
       const sortedProducts = [...state.productsCopy].sort((a, b) => {
         return action.payload === "asc"
@@ -27,52 +23,73 @@ const productSlice = createSlice({
       });
       state.productsCopy = sortedProducts;
     },
+
     filterByCategory: (state, action) => {
       const { mar, cate } = action.payload;
-      console.log(mar, cate);
-      if (!mar.length || !cate.length) {
+
+      // Si no hay filtros aplicados, muestra todos los productos
+      if (!mar.length && !cate.length) {
         state.productsCopy = state.allProducts;
         return;
       }
 
-      const filteredByCategory = state.allProducts.filter((product) => {
-        return mar.includes(product.marca) && cate.includes(product.categoria);
+      // Filtrado flexible
+      const filteredProducts = state.allProducts.filter((product) => {
+        const matchesCategory = cate.length
+          ? cate.includes(product.categoria)
+          : true;
+        const matchesBrand = mar.length ? mar.includes(product.marca) : true;
+        return matchesCategory && matchesBrand;
       });
-      console.log(filteredByCategory);
-      state.productsCopy = action.payload
-        ? filteredByCategory
-        : state.allProducts;
+
+      state.productsCopy = filteredProducts;
     },
+
     addFilter: (state, action) => {
       const { name, value } = action.payload;
-      state[name].push(value);
+      state[name].push(value); // Agrega un filtro a la lista correspondiente
     },
+
     removeFilter: (state, action) => {
       const { name, value } = action.payload;
-      state[name] = state[name].filter((filterValue) => filterValue !== value);
+      state[name] = state[name].filter((filterValue) => filterValue !== value); // Elimina el filtro seleccionado
     },
-    loadMarcas: (state, action) => {
-      state.marca = action.payload;
-    },
+
     setTextFilter: (state, action) => {
-      state.text = action.payload;
+      state.text = action.payload; // Actualiza el texto de búsqueda
     },
-      
-    filterByText: (state, action) => {
-      state.productsCopy = action.payload ? action.payload : state.allProducts
+
+    filterByText: (state) => {
+      // Filtrado por texto (nombre del producto)
+      if (state.text.trim() === "") {
+        state.productsCopy = state.allProducts; // Si no hay texto, muestra todos los productos
+        return;
+      }
+
+      const filteredProducts = state.allProducts.filter((product) =>
+        product.nombre.toLowerCase().includes(state.text.toLowerCase())
+      );
+      state.productsCopy = filteredProducts;
+    },
+
+    clearFilters: (state) => {
+      state.marca = [];
+      state.categoria = [];
+      state.text = "";
+      state.productsCopy = state.allProducts; // Reinicia todos los filtros
     },
   },
 });
 
 export const {
   setAllProducts,
-  updateProductsCopy,
   sortProducts,
   filterByCategory,
   addFilter,
   removeFilter,
-  loadMarcas,
   setTextFilter,
   filterByText,
+  clearFilters,
 } = productSlice.actions;
+
 export default productSlice.reducer;

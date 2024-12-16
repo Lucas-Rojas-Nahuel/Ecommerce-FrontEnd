@@ -1,11 +1,23 @@
 import { useNavigate } from "react-router-dom";
 import useUserCrud from "../../hooks/users/useUserCrud";
 import "./ManageProducts.css";
+import usePagination from "../../hooks/usePagination";
 
 export default function ManageUsers() {
   const { users, loading, error, deleteUser } = useUserCrud(
     import.meta.env.VITE_REACT_APP_ROUTE_USUARIOS
   );
+
+  const usersPerPage = 7;
+
+  const {
+    displayedItems: displayedUsers,
+    currentPage,
+    totalPages,
+    handlePageChange,
+    handleNextPage,
+    handlePreviousPage,
+  } = usePagination(users, usersPerPage);
 
   const navigate = useNavigate();
 
@@ -46,9 +58,9 @@ export default function ManageUsers() {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {displayedUsers.map((user, index) => (
               <tr key={user._id}>
-                <td>{index + 1}</td>
+                <td>{(currentPage - 1) * usersPerPage + index + 1}</td>
                 <td>{user._id}</td>
                 <td>{user.nombre}</td>
                 <td>{user.username}</td>
@@ -72,6 +84,34 @@ export default function ManageUsers() {
             ))}
           </tbody>
         </table>
+        {/* Paginación */}
+        <div className="pagination-container">
+          <button
+            className="pagination-btn"
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+          >
+            Anterior
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              className={`pagination-btn ${
+                page === currentPage ? "active" : ""
+              }`}
+              onClick={() => handlePageChange(page)}
+            >
+              {page}
+            </button>
+          ))}
+          <button
+            className="pagination-btn"
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+          >
+            Siguiente
+          </button>
+        </div>
       </div>
     </section>
   );

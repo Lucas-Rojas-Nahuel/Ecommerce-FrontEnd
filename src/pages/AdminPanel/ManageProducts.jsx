@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import useProductCrud from "../../hooks/products/useProductCrud";
 import "./ManageProducts.css";
 import { useState } from "react";
+import usePagination from "../../hooks/usePagination";
 
 export default function ManageProducts() {
   const { products, loading, error, deleteProduct } = useProductCrud(
@@ -9,19 +10,16 @@ export default function ManageProducts() {
   );
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  // Paginación
-  const [currentPage, setCurrentPage] = useState(1); // Página actual (1-indexada)
-  const productsPerPage = 6; // Productos por página
+  const productsPerPage = 7;
 
-  const totalPages = Math.ceil(products.length / productsPerPage); // Total de páginas
-
-  // Calcular los productos para la página actual
-  const indexOfLastProduct = currentPage * productsPerPage; // Índice del último producto de la página actual
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage; // Índice del primer producto
-  const displayedProducts = products.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  ); // Productos a mostrar
+  const {
+    displayedItems: displayedProducts,
+    currentPage,
+    totalPages,
+    handlePageChange,
+    handleNextPage,
+    handlePreviousPage,
+  } = usePagination(products, productsPerPage);
 
   const navigate = useNavigate();
 
@@ -42,17 +40,6 @@ export default function ManageProducts() {
 
   const handleEditProduct = (id) => {
     navigate(`/edit-product/${id}`);
-  };
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
-  };
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) setCurrentPage(currentPage - 1);
   };
 
   if (loading) return <div>Cargando...</div>;
@@ -92,7 +79,7 @@ export default function ManageProducts() {
           <tbody>
             {displayedProducts.map((product, index) => (
               <tr key={product._id}>
-                <td>{indexOfFirstProduct + index + 1}</td>
+                <td>{(currentPage - 1) * productsPerPage + index + 1}</td>
                 <td>{product._id}</td>
                 <td>{product.nombre}</td>
                 <td>{product.categoria}</td>

@@ -1,11 +1,15 @@
 .nav-link {
   display: flex;
-  background-color: var(--dark);
+  background-color: var(--dark)!important;
   justify-content: center;
   align-items: center;
   gap: 10px;
   height: 40px;
 }
+.margin{
+  margin-top: 40px!important;
+}
+
 
 .menu {
   height: 100%;
@@ -102,8 +106,10 @@
   pointer-events: none;
   color: gray;
 }
+
 @media (max-width: 600px) {
-  .nav-link {
-    display: none;
+  
+  .nav-link{
+    display: none!important;
   }
 }

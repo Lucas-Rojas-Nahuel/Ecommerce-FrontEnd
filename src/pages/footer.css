@@ -1,20 +1,8 @@
-.section-footer{
-    background-color:var(--dark);
-}
-
-.section-footer, .content-footer-link{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-}
-
-.content-footer-link{
-    gap: 15px;
-    list-style: none;
+footer a:hover{
+    color: #7BE495!important;
+    transition: color 0.3s ease;
 }
 
 .content-footer-link li a {
     text-decoration: none;
-    color: var(--white);
 }

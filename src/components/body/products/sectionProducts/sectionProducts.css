@@ -1,12 +1,12 @@
 .section-products{
-    background-color: blueviolet;
-    height: 100%;
+    background: linear-gradient(135deg, var(--dark-green), var(--light-green), var(--green-apple))!important;
+    height: auto!important;
+    width: 100%;
     padding: 20px;
-    flex-grow: 1;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-y: auto;
 }
 
 .content-card{

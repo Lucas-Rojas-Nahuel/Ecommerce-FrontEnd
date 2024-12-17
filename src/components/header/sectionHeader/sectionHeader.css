@@ -1,30 +1,40 @@
-.section-header{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: var(--dark);
-    width: 100%;
-    height: 50px;
-    box-sizing: border-box;
+ .bg-color{
+    background-color: var(--dark)!important;
+    color: var(--white)!important;
 }
 
-.custom-width  {
-  min-width: 100px!important; /* Ajusta según el contenido */
+.custom-width {
+  min-width: 100px !important; /* Ajusta según el contenido */
 }
 
-.btn-users{
-    width: 87px!important;
-}
-.shopping{
-    width: 40px!important;
+.btn-users .dropdown-toggle {
+  display: flex !important; /* Asegura que el botón sea flex */
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Opcional: centra horizontalmente si es necesario */
+  height: 100%; /* Asegura consistencia con el resto del diseño */
 }
 
-@media (max-width: 600px ){
-    .content-searches{
-        display: none;
-    }
+.border-box {
+  box-sizing: border-box;
+height: 40px!important;
+}
 
-    .section-header{
-        justify-content: space-between;
-    }
+.btn-users {
+  width: 87px !important;
+}
+.shopping {
+  width: 40px !important;
+}
+
+.btn-search{
+  display: none!important;
+}
+
+@media (max-width: 600px) {
+  .content-searches {
+    display: none;
+  }
+  .btn-search{
+    display: block!important;
+  }
 }

@@ -1,27 +1,10 @@
-.section-header1{
-    position: relative;
-    height: 90px;
-    width: 100%;
+.header {
+  height: 80px !important;
+  width: 100%;
 }
 
-.section-div{
-    position: absolute;
-    height: 90px;
-    width: 100%;
-    background-color: aqua;
-}
-
-.header{
-    height: 100%;
-    top: 0;
-    left: 0;
-    width: 100%;
-    box-sizing: border-box; 
-    z-index: 1004;  
-}
-
-
-
-@media(max-width:600px){
-     
+@media (max-width: 600px) {
+  .header {
+    height: 40px !important;
+  }
 }

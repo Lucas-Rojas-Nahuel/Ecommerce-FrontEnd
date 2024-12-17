@@ -6,7 +6,7 @@ export default function SectionDiscount() {
     <section className="section-discount">
       <section className="section-title">
         <h3 className="title">Ofertas</h3>
-        <a href="">
+        <a href=""> 
           <strong>Conocer más Ofertas</strong>
         </a>
       </section>

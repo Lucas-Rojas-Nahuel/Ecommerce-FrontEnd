@@ -8,6 +8,7 @@ import {
   sortProducts,
   clearFilters,
 } from "../../../../slices/productsSlice";
+import Form from "react-bootstrap/Form";
 
 export default function SectionOptions() {
   const allProducts = useSelector((state) => state.products.allProducts);
@@ -59,22 +60,29 @@ export default function SectionOptions() {
   );
 
   return (
-    <section className="section-options">
-      <div className="div-options">
-        <h4>Ordenamiento</h4>
-        <select onChange={handleSort}>
+    <section className="section-options container  p-3 shadow">
+      <div className="div-options ">
+        <h4 className="text-primary mb-3">Ordenamiento</h4>
+        <select className="form-select mb-4" onChange={handleSort}>
           <option value="asc">Menor a Mayor</option>
           <option value="desc">Mayor a Menor</option>
         </select>
 
-        <h3>Filtros</h3>
+        <h3 className="text-secondary mb-3">Filtros</h3>
         <form onSubmit={handleSubmit}>
-          <ul>
-            <li>Categorías</li>
+          <ul className="list-group mb-3">
+            <li className="list-group-item bg-primary text-white">
+              Categorías
+            </li>
             {categories.map((categoria, index) => (
-              <li key={index}>
-                <input
-                  type="checkbox"
+              <li
+                key={index}
+                className="list-group-item bg-secondary d-flex align-items-center "
+              >
+                <Form.Check
+                  type="switch"
+                  id={`checkbox-${index}`}
+                  className="me-2 custom-checkbox"
                   name="categoria"
                   value={categoria}
                   onChange={handleChange}
@@ -86,12 +94,17 @@ export default function SectionOptions() {
           </ul>
 
           {activeCategorias.length > 0 && (
-            <ul>
-              <li>Marcas</li>
+            <ul className="list-group mb-3">
+              <li className="list-group-item bg-success text-white">Marcas</li>
               {filteredBrands.map((marca, index) => (
-                <li key={index}>
-                  <input
-                    type="checkbox"
+                <li
+                  key={index}
+                  className="list-group-item bg-secondary d-flex align-items-center"
+                >
+                  <Form.Check
+                    type="switch"
+                    id={`checkbox-${index}`}
+                    className="me-2 custom-checkbox"
                     name="marca"
                     value={marca}
                     onChange={handleChange}
@@ -102,17 +115,18 @@ export default function SectionOptions() {
               ))}
             </ul>
           )}
-
-          <button className="button-filter" type="submit">
-            Filtrar
-          </button>
-          <button
-            className="button-filter"
-            type="button"
-            onClick={handleClearFilters}
-          >
-            Quitar Filtros
-          </button>
+          <div className="d-flex gap-2 align-items-center justify-content-center mb-5 ">
+            <button className="button-filter btn btn-primary" type="submit">
+              Filtrar
+            </button>
+            <button
+              className="button-filter btn btn-outline-secondary"
+              type="button"
+              onClick={handleClearFilters}
+            >
+              Quitar Filtros
+            </button>
+          </div>
         </form>
       </div>
     </section>

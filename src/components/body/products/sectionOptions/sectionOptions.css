@@ -1,23 +1,28 @@
-.section-options,
-.padre {
-  position: relative;
-  height: 100%;
-  width: 280px;
-  overflow: hidden;
-  background-color: #2d3436;
-  color: #fff;
+.section-options {
+  background-color: #2d3436!important;
+  position: relative!important;
+  height: 100%!important;
+  width: 280px!important;
+  overflow: hidden!important;
+  background-color: #2d3436!important;
+  color: #fff!important;
 }
 
-.div-options,
-.hijo {
-  position: absolute;
+.div-options {
+  position: absolute!important;
   top: 10;
   left: 10;
   height: 100%;
-  width: 100%;
+  width: 245px!important;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
+  overflow-y: auto;
+}
+
+.custom-checkbox{
+  width: 20px!important;
+  height: 20px!important;
+  cursor: pointer!important;
 }
 
 h4,
@@ -78,4 +83,18 @@ select option {
 select:hover {
   border-color: #55efc4; /* Cambiar borde al pasar el mouse */
   background-color: #333; /* Fondo un poco más oscuro */
+}
+
+@media (max-width: 600px){
+  .section-options{
+    padding: auto!important;
+    width: 100%!important;
+    box-sizing: border-box!important;
+  }
+  
+  .div-options{
+    box-sizing: border-box!important;
+   
+    width: 90%!important;
+  }
 }

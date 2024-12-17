@@ -6,7 +6,7 @@ import { addCart } from "../../../../../slices/cartSlice";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { Card,Button  } from "react-bootstrap";
-
+ 
 // eslint-disable-next-line react/prop-types
 export default function CardProducts({ id, imagen, nombre, precio }) {
   const dispatch = useDispatch();

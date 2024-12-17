@@ -104,6 +104,7 @@ function App() {
                 <Route path="/profile" element={<Profile/>}/>
                 <Route path="/home" element={<Home />} />
                 <Route path="/products" element={<Products />} />
+                <Route path="/products/:id" element={<ProductInfo />} />
                 <Route path="/offer" element={<Offer />} />
                 <Route path="/sell" element={<Sell />} />
                 <Route path="/wishList" element={<WishList />} />

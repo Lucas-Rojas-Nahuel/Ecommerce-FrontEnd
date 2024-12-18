@@ -1,35 +1,4 @@
 .cart{
-    padding: 20px;
-    border: solid 1px #ddd;
-    background-color: #f9f9f9;
-    color: #000;
-    height: 100vh;
-}
-
-.cartable {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.cartable th, .cartable td{
-    padding: 10px;
-    border: solid 1px #ddd;
-    text-align: left;
-}
-
-.btn-cart{
-    margin: 10px;
-    height: 30px;
-    border-radius: 10px;
-     
-}
-
-.green{
-    background-color: green;
-}
-
-.btn-cart:hover{
-    background-color: rgb(69, 100, 238);
-    color: azure;
-    height: 35px;
+    background: linear-gradient(135deg, var(--dark-green), var(--light-green), var(--green-apple))!important;
+    color: rgb(223, 206, 206)!important;    
 }

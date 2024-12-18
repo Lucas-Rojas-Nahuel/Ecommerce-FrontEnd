@@ -3,7 +3,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-}
+} 
 
 .conten-btn-filter {
   box-sizing: border-box;
@@ -15,21 +15,18 @@
 .content-products {
   height: 100%;
   box-sizing: border-box;
-  margin-top: 13px !important;
+  
   display: flex;
-  overflow: hidden;
+  
 }
 
 @media (max-width: 1379px) {
-    .content-products {
-      margin-top: 80px !important;
-    }
+    
 }
 
 @media (max-width: 600px) {
   .conten-btn-filter {
     display: flex;
-    margin-top: 40px !important;
   }
 
   .contentFilters{

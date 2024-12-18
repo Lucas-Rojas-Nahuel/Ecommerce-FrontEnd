@@ -1,6 +1,5 @@
 .header {
   height: 80px !important;
-  width: 100%;
 }
 
 @media (max-width: 600px) {

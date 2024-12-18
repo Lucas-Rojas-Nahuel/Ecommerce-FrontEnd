@@ -1,26 +1,16 @@
-.section-orders{
-
-height: 100%;
-display: flex;
-justify-content: center;
-align-items: center;
-padding: 10px;
+.section-orders {
+  padding: 10px;
+  width: 100vw;
 }
 
-.content-orders{
-    width: 60%;
-    display: flex;
-    flex-direction: column;
+.cart{
+    width: 100%;
+    padding: 30px;
+    border-radius: 10px;
 }
-
-.form-orders{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.form-orders div{
-    display:flex;
-    justify-content: center;
-    gap: 10px;
+ 
+.form-orders div {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }

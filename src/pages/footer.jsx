@@ -1,8 +1,8 @@
 import "./footer.css";
 
 export default function Footer() {
-  return (
-    <footer className="bg-dark text-white py-3">
+  return ( 
+    <footer className="bg-dark text-white py-3 footer">
       <div className="container text-center">
         <ul className="content-footer-link list-unstyled d-flex justify-content-center gap-3 mb-0">
           <li>

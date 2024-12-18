@@ -1,16 +1,15 @@
 .section-container {
   width: 100%;
+  flex-grow: 1;
   height: 100%;
   background-color: #2d3436 !important;
-  margin-top: 80px;
   color: rgb(223, 206, 206)!important;
 }
 
 .section-product-info {
     background: linear-gradient(135deg, var(--dark-green), var(--light-green), var(--green-apple))!important;
   height: 100%;
-  overflow-y: auto;
-  scrollbar-width: none;
+  
 }
 
 .title-color{

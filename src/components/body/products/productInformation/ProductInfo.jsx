@@ -94,7 +94,7 @@ export default function ProductInfo() {
 
   const handleAccess = () => {
     if (isAuthenticated) {
-      navigate(`/product-orders`);
+      navigate(`/product-orders/${id}`);
     } else {
       setShowAlert(true); // Muestra la alerta
     }
@@ -147,7 +147,7 @@ export default function ProductInfo() {
             </Alert>
           </div>
         )}
-        <Row className="product-info align-items-center">
+        <Row className="product-info align-items-center m-0">
           <Col md={6}>
             <Card className="content-img-product">
               <Card.Img
@@ -202,7 +202,7 @@ export default function ProductInfo() {
           </Col>
         </Row>
         <hr />
-        <Row className="product-reviews-section">
+        <Row className="product-reviews-section m-0">
           <Col>
             <h3>Reseñas</h3>
 

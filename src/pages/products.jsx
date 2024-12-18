@@ -24,7 +24,7 @@ export default function Products() {
   //probando
 
   return (
-    <section className="products">
+    <section className="products vh-100">
       <div className="conten-btn-filter">
         <Button variant="primary" onClick={toggleShow} className="me-2">
         <i className="fi fi-br-outdent"></i>
@@ -40,7 +40,7 @@ export default function Products() {
       </Offcanvas>
       <div className="content-products">
         <div className="content-none">
-          <SectionOptions onFilterChange={handleFilterChange} />
+          <SectionOptions onFilterChange={handleFilterChange} /> 
         </div>
         <SectionProducts filters={filters} />
       </div>

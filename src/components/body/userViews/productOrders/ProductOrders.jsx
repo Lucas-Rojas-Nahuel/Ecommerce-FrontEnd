@@ -65,7 +65,7 @@ export default function ProductOrders() {
     try {
       const response = await axios.post(
         import.meta.env.VITE_REACT_APP_ROUTE_MEACADO_PAGO,
-        { productsList, ordenId }
+        { productsList, ordenId, idProducts }
       );
       console.log(response)
       const { id } = response.data;
@@ -85,6 +85,7 @@ export default function ProductOrders() {
   };
 
   const { id } = useParams();
+  const idProducts = id;
   useRouteState(`/product-orders/${id}`);
 
   const cancelOrder = async () => {

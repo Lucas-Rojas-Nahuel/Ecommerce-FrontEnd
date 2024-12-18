@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { deleteOrder } from "../../slices/orderSlice";
 import { useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -7,6 +7,7 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 export default function FailurePage() {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate()
 
   // Extraer parámetros de la URL (opcional)
   const collectionId = searchParams.get("collection_id");
@@ -14,6 +15,16 @@ export default function FailurePage() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const ordenId = queryParams.get("ordenId");
+  const idProducts = queryParams.get("idProducts");
+
+  const handleSumit = () => {
+    if(idProducts){
+      navigate(`/product-orders/${idProducts}`);
+    }else{
+      navigate('/product-orders')
+    }
+  }
+
 
   useEffect(() => {
     if (ordenId) {
@@ -37,10 +48,10 @@ export default function FailurePage() {
             {collectionId || "No disponible"}
           </p>
           <div className="d-flex justify-content-center gap-3 mt-4">
-            <Button variant="outline-primary" href="/product-orders">
+            <Button variant="outline-primary" onClick={handleSumit}>
               Reintentar pago
             </Button>
-            <Button variant="primary" href="/" className="">
+            <Button variant="primary"  href="/" className="">
               Volver al inicio
             </Button>
           </div>

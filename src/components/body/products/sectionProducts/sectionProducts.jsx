@@ -18,7 +18,7 @@ export default function SectionProducts({ filters }) {
   const ultimoIndice = paginaActual * productosPorPagina;
   const primerIndice = ultimoIndice - productosPorPagina;
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
   useEffect(() => {
     axios
       .get(import.meta.env.VITE_REACT_APP_ROUTE_PRODUCTS)

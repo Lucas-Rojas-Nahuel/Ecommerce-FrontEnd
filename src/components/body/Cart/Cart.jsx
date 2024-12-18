@@ -59,7 +59,7 @@ export default function Cart() {
 
 
   return (
-    <Container className="cart w-100" style={{ maxWidth: "2800px" }}>
+    <Container className="cart w-100 vh-100" style={{ maxWidth: "2800px" }}>
       {/* <article className="adaptable"> */}
       {showAlert && (
         <div

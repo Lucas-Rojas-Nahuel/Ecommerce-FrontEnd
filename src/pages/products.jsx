@@ -24,7 +24,7 @@ export default function Products() {
   //probando
 
   return (
-    <section className="products vh-100">
+    <section className="products ">
       <div className="conten-btn-filter">
         <Button variant="primary" onClick={toggleShow} className="me-2">
         <i className="fi fi-br-outdent"></i>

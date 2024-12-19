@@ -1,11 +1,5 @@
 import "./sectionHeader.css";
-import {
-  Nav,
-  Navbar,
-  NavDropdown,
-  Button,
-  Offcanvas,
-} from "react-bootstrap";
+import { Nav, Navbar, NavDropdown, Button, Offcanvas } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -43,10 +37,9 @@ export default function SectionHeader() {
   };
 
   const handleLogout = () => {
-    setTimeout(() => {
-      dispatch(logout());
-      navigate("/home");
-    }, 2000);
+    dispatch(logout());
+    navigate("/home");
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -68,7 +61,7 @@ export default function SectionHeader() {
     >
       <div className="d-flex border-box justify-content-between align-items-center px-2 w-100">
         <Navbar.Brand
-          href={role === "admin" ? "/manageProducts" : "/"}
+          href={role === "admin" ? "/adminView" : "/"}
           className="text-white fw-bold"
         >
           {windowWidth < 600 ? (
@@ -79,12 +72,7 @@ export default function SectionHeader() {
             />
           ) : (
             <>
-              <img
-                src={logo}
-                alt="CompuGamer Logo"
-                className="navbar-logo "
-                
-              />
+              <img src={logo} alt="CompuGamer Logo" className="navbar-logo " />
               CompuGamer
             </>
           )}
@@ -161,12 +149,7 @@ export default function SectionHeader() {
       </div>
       <Offcanvas show={show} onHide={toggleShow} placement="end">
         <Offcanvas.Header closeButton>
-          <img
-            src={logo}
-            alt="CompuGamer Logo"
-            className="navbar-logo "
-            
-          />
+          <img src={logo} alt="CompuGamer Logo" className="navbar-logo " />
           <Offcanvas.Title>CompuGamer</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body className="bg-dark">

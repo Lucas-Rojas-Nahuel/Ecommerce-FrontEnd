@@ -26,7 +26,7 @@ export default function Products() {
   return (
     <section className="products ">
       <div className="conten-btn-filter">
-        <Button variant="primary" onClick={toggleShow} className="me-2">
+        <Button variant="link" onClick={toggleShow} className="me-2 text-decoration-none">
         <i className="fi fi-br-outdent"></i>
         </Button>
       </div>

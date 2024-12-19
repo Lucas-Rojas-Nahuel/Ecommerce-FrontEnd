@@ -7,7 +7,9 @@ import {
   setButtonInactive,
   setRegistryActive,
 } from "../../features/button/buttonModal";
- 
+import { Button, Form, Container, Row, Col, Alert } from "react-bootstrap";
+import CloseButton from "react-bootstrap/CloseButton";
+
 export default function Register() {
   const dispatch = useDispatch();
 
@@ -28,8 +30,6 @@ export default function Register() {
       [e.target.name]: e.target.value,
     });
 
-   
-
   const handleRegister = async () => {
     setError("");
 
@@ -39,7 +39,8 @@ export default function Register() {
     }
 
     try {
-      const response = await axios.post(import.meta.env.VITE_REACT_APP_ROUTE_REGISTER,
+      const response = await axios.post(
+        import.meta.env.VITE_REACT_APP_ROUTE_REGISTER,
         form
       );
       console.log(response);
@@ -47,103 +48,123 @@ export default function Register() {
       dispatch(setRegistryActive());
     } catch (error) {
       console.error("Error en el registro", error);
-      setError("Error en el registro");
+      setError(
+        error.response?.data?.message ||
+          "Error en el registro. Inténtalo nuevamente."
+      );
     }
   };
 
   return (
-    <>
-      <div className="content-btn-close">
-        <button
-          className="btn-close"
-          type="button" 
-          onClick={() => dispatch(setButtonInactive())}
-        >
-          <i className="fi fi-br-cross"></i>
-        </button>
-      </div>
-      <div className="content-text">
-        <h2>Registrarse</h2>
-        <p>Ingresá tus datos para crear tu cuenta</p>
-        {error && <p className="error">{error}</p>}
-      </div>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleRegister();
-        }}
-        className="form-register"
-      >
-        <div className="content-data">
-          <div className="content-label-input">
-            <label htmlFor="name-register">Nombre</label>
-            <input
-              type="text"
-              id="name-register"
-              name="nombre"
-              value={form.nombre}
-              onChange={handleChange}
-              required
-            />
+    <Container className="mt-0">
+      <Row className="justify-content-center">
+        <Col>
+          <div className="d-flex justify-content-end">
+            <CloseButton
+              size="sm"
+              className="btn-close btn-close-white"
+              onClick={() => {
+                dispatch(setButtonInactive());
+                dispatch(setRegistryActive());
+              }}
+            ></CloseButton>
           </div>
-          <div className="content-label-input">
-            <label htmlFor="lastname-register">Nombre de Usuario</label>
-            <input
-              type="text"
-              id="lastname-register"
-              name="username"
-              value={form.username}
-              onChange={handleChange}
-              required
-            />
-          </div>
-        </div>
-
-        <div className="content-label-input">
-          <label htmlFor="email-register">Email</label>
-          <input
-            type="email"
-            id="email-register"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="content-data">
-          <div className="content-label-input">
-            <label htmlFor="password-register">Contraseña</label>
-            <input
-              type="password"
-              id="password-register"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="content-label-input">
-            <label htmlFor="password-repeat-register">Repetir Contraseña</label>
-            <input
-              type="password"
-              id="password-repeat-register"
-              name="passwordRepeat"
-              value={passwordRepeat}
-              onChange={(e) => setPasswordRepeat(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <button type="submit" className="submit-btn">
-          REGISTRARME
-        </button>
-      </form>
-
-      <p>
-        ¿Ya tenés cuenta? Inicia sesión{" "}
-        <NavLink onClick={() => dispatch(setRegistryActive())}>aca</NavLink>
-      </p>
-    </>
+          <h2>Registrarse</h2>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleRegister();
+            }}
+            className="form-register"
+          >
+            <Row>
+              <Col className="gap-2">
+                <Form.Group
+                  className="content-label-input mb-3"
+                  controlId="name-register"
+                >
+                  <Form.Label>Nombre</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="nombre"
+                    value={form.nombre}
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group
+                  className="content-label-input mb-3"
+                  controlId="username-register"
+                >
+                  <Form.Label>Nombre de Usuario</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="username"
+                    value={form.username}
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
+              </Col>
+              <Form.Group
+                className="content-label-input mb-3"
+                controlId="email-register"
+              >
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                />
+              </Form.Group>
+              <Col className="gap-2">
+                <Form.Group
+                  className="content-label-input mb-3"
+                  controlId="password-register"
+                >
+                  <Form.Label htmlFor="password-register">
+                    Contraseña
+                  </Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="password"
+                    value={form.password}
+                    onChange={handleChange}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group
+                  className="content-label-input mb-3"
+                  controlId="password-repeat-register"
+                >
+                  <Form.Label>Repetir Contraseña</Form.Label>
+                  <Form.Control
+                    type="password"
+                    name="passwordRepeat"
+                    value={passwordRepeat}
+                    onChange={(e) => setPasswordRepeat(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+              <Button type="submit" variant="primary" className="w-100">
+                REGISTRARME
+              </Button>
+            </Row>
+          </Form>
+          <p className="text-center mt-3">
+            ¿Ya tenés cuenta?{" "}
+            <NavLink
+              className="text-primary"
+              onClick={() => dispatch(setRegistryActive())}
+            >
+              Inicia sesión aca
+            </NavLink>
+          </p>
+        </Col>
+      </Row>
+    </Container>
   );
 }

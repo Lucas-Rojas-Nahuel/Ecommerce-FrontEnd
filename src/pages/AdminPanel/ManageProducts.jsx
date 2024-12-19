@@ -1,8 +1,18 @@
 import { useNavigate } from "react-router-dom";
 import useProductCrud from "../../hooks/products/useProductCrud";
-import "./ManageProducts.css";
-import { useState } from "react";
 import usePagination from "../../hooks/usePagination";
+import { useState } from "react";
+import {
+  Table,
+  Button,
+  Alert,
+  Spinner,
+  Container,
+  Row,
+  Col,
+  Pagination,
+} from "react-bootstrap";
+import "./ManageProducts.css";
 
 export default function ManageProducts() {
   const { products, loading, error, deleteProduct } = useProductCrud(
@@ -28,7 +38,6 @@ export default function ManageProducts() {
       "¿Seguro que desea eliminar el producto?"
     );
     if (confirmDelete) {
-      console.log(id);
       deleteProduct(id);
       setShowSuccessMessage(true);
       setTimeout(() => {
@@ -42,27 +51,38 @@ export default function ManageProducts() {
     navigate(`/edit-product/${id}`);
   };
 
-  if (loading) return <div>Cargando...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (loading) return <container className='vh-100 vw-100 d-flex justify-content-center align-items-center'><Spinner animation="border" variant="primary" /></container> 
+  if (error)
+    return (
+      <Alert variant="danger">
+        Error: {error.message || "Error desconocido"}
+      </Alert>
+    );
 
   return (
-    <section className="section-manageProduct">
-      {/* Mensaje flotante */}
-      {showSuccessMessage && (
-        <div className="toast success-toast">Producto eliminado con éxito.</div>
-      )}
-      {error && <div className="toast error-toast">{error}</div>}
-      <h3>Administrar Productos</h3>
-      <div>
-        <h1>Productos</h1>
-        <button
-          className="table-btn"
-          style={{ marginBottom: "10px", backgroundColor: "#00b894" }}
-          onClick={() => navigate("/create-product")}
-        >
-          Crear Producto
-        </button>
-        <table className="table">
+    <div className="section-width">
+      <Container className="section-manageProduct ">
+        <Row className="my-4">
+          <Col>
+            <h3>Administrar Productos</h3>
+          </Col>
+          <Col className="text-end">
+            <Button
+              variant="success"
+              onClick={() => navigate("/create-product")}
+            >
+              Crear Producto
+            </Button>
+          </Col>
+        </Row>
+        {/* Mensaje flotante */}
+        {showSuccessMessage && (
+          <Alert variant="success" className="toast success-toast">
+            Producto eliminado con éxito.
+          </Alert>
+        )}
+
+        <Table variant="dark" striped bordered hover responsive>
           <thead>
             <tr>
               <th>Índice</th>
@@ -89,53 +109,55 @@ export default function ManageProducts() {
                 </td>
                 <td>{product.stock}</td>
                 <td>{new Date(product.fechaIngreso).toLocaleDateString()}</td>
-                <td>
-                  <button
-                    className="table-btn"
+                <td style={{ width: "80px", whiteSpace: "nowrap" }}>
+                  <Button
+                    variant="primary"
+                    size="sm"
+                    className="me-2"
                     onClick={() => handleEditProduct(product._id)}
                   >
-                    Editar
-                  </button>
-                  <button
-                    className="table-btn"
+                    <i className="fi fi-sr-edit-alt"></i>
+                  </Button>
+                  <Button
+                    variant="danger"
+                    size="sm"
                     onClick={() => handleDeleteProduct(product._id)}
                   >
-                    Eliminar
-                  </button>
+                   <i className="fi fi-ss-trash"></i>
+                  </Button>
                 </td>
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
         {/* Paginación */}
-        <div className="pagination-container">
-          <button
-            className="pagination-btn"
-            onClick={handlePreviousPage}
-            disabled={currentPage === 1}
-          >
-            Anterior
-          </button>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <button
-              key={page}
-              className={`pagination-btn ${
-                page === currentPage ? "active" : ""
-              }`}
-              onClick={() => handlePageChange(page)}
-            >
-              {page}
-            </button>
-          ))}
-          <button
-            className="pagination-btn"
-            onClick={handleNextPage}
-            disabled={currentPage === totalPages}
-          >
-            Siguiente
-          </button>
-        </div>
-      </div>
-    </section>
+        <Row>
+          <Col className="d-flex justify-content-center">
+            <Pagination>
+              <Pagination.Prev
+                onClick={handlePreviousPage}
+                disabled={currentPage === 1}
+              />
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                (page) => (
+                  <Pagination.Item
+                    key={page}
+                    active={page === currentPage}
+                    onClick={() => handlePageChange(page)}
+                  >
+                    {page}
+                  </Pagination.Item>
+                )
+              )}
+              <Pagination.Next
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+              />
+            </Pagination>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }

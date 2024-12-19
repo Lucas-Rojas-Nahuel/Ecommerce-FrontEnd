@@ -12,6 +12,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --bs-carousel-control-prev-icon-bg: white;
+  --bs-carousel-control-next-icon-bg: white;
 }
 
 

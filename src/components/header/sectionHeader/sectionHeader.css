@@ -30,6 +30,28 @@ height: 40px!important;
   display: none!important;
 }
 
+.navbar-logo {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.span-count {
+  background-color: red; /* Fondo rojo */
+  color: white; /* Texto blanco para mejor contraste */
+  font-size: 12px; /* Ajusta el tamaño del texto */
+  font-weight: bold; /* Resalta el número */
+  width: 20px; /* Ancho fijo para formar un círculo */
+  height: 20px; /* Altura igual al ancho */
+  border-radius: 50%; /* Hace que sea un círculo */
+  display: flex; /* Centra el contenido */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  position: absolute; /* Para posicionarlo sobre otros elementos */
+  top: 19px; /* Ajusta la posición vertical */
+  right: 2px; /* Ajusta la posición horizontal */
+}
+
 @media (max-width: 600px) {
   .content-searches {
     display: none;

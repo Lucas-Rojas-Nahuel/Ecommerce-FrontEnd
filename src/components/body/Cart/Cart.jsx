@@ -83,7 +83,7 @@ export default function Cart() {
             className="mt-3 text-center"
             style={{
               maxWidth: "500px",
-              textAlign: "center",
+              textAlign: "center", 
             }}
           >
             <h4 className="alert-heading">¡Atención!</h4>

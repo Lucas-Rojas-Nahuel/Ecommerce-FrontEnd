@@ -1,0 +1,20 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "La Dorita",
+			"country": {
+				"code": "AR",
+				"name": "Argentina"
+			},
+			"subdivision": {
+				"code": "W",
+				"name": "Corrientes"
+			},
+			"timezone": "America/Argentina/Cordoba",
+			"latitude": -29.5917,
+			"longitude": -58.7917,
+			"postalCode": "3196"
+		},
+		"timestamp": 1734610655097
+	}
+}
